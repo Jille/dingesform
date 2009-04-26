@@ -10,7 +10,10 @@
 	require('textarea.php');
 	require('integer.php');
 	require('password.php');
+	require('radiobutton.php');
 	require('static.php');
+
+	var_dump($_POST);
 
 	$f = new DingesForm();
 
@@ -40,6 +43,10 @@
 	$bier->setAttribute('size', 4);
 
 	$pass = $f->createInputField('password', 'pass', false, 'Wachtwoord');
+
+	$jaofnee = $f->createInputField('radiobutton', 'jaofnee', false, 'Ja of Nee');
+	$jaofnee->addItem('ja', 'Ja');
+	$jaofnee->addItem('nee', 'Nee');
 
 	$favbier = new DingesStatic('favbier', 'Favoriete bier');
 	$favbier->setDefaultValue('Hertog Jan');
@@ -103,6 +110,14 @@
 			<tr>
 				<td><?= $strings['label_pass'] ?></td>
 				<td><?= $strings['element_pass'] ?></td>
+			</tr>
+			<tr>
+				<td><?= $strings['label_jaofnee'] ?></td>
+				<td><?= $strings['radio_jaofnee_ja'] .' '. $strings['radio_label_jaofnee_ja'] ?></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><?= $strings['radio_jaofnee_nee'] .' '. $strings['radio_label_jaofnee_nee'] ?></td>
 			</tr>
 			<tr>
 				<td><?= $strings['label_favbier'] ?></td>

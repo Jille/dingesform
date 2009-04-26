@@ -88,9 +88,13 @@
 			$this->strings['form_close'] = '</form>';
 
 			foreach($this->fields as $field) {
-				$this->strings['element_'. $field->name] = $field->render();
 				$this->strings['label_'. $field->name] = $field->getLabelTag();
-				$this->strings['id_'. $field->name] = $this->fieldIdPrefix . $field->id;
+				if($field instanceOf DingesRadioButton) {
+					$this->strings = array_merge($this->strings, $field->render());
+				} else {
+					$this->strings['element_'. $field->name] = $field->render();
+					$this->strings['id_'. $field->name] = $this->fieldIdPrefix . $field->id;
+				}
 			}
 		}
 

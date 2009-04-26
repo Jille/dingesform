@@ -57,6 +57,12 @@
 			}
 		}
 
+		function deleteAttribute($name) {
+			if(isset($this->attributes[$name])) {
+				unset($this->attributes[$name]);
+			}
+		}
+
 		function getAttribute($name) {
 			return $this->attributes[$name];
 		}
