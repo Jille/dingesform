@@ -12,7 +12,7 @@
 			if($this->required && !$value) {
 				throw new DingesInputFieldEmptyException($this);
 			}
-			$this->value = $value;
+			return $value;
 		}
 	}
 

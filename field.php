@@ -44,7 +44,7 @@
 		}
 
 		function parseInput($value) {
-			$this->value = $value;
+			return $value;
 		}
 
 		function fillAttributes() {

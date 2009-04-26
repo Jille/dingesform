@@ -34,10 +34,11 @@
 
 			if($this->isSubmitted) {
 				try {
+					// XXX als je een exception krijgt verandert hij $field->value niet; en wordt het veld leeg (of erger, de defaultValue); ik denk dat je dan de letterlijk ingevoerde waarde weer wilt tonen
 					if(isset($_POST[$field->name])) {
-						$field->parseInput($_POST[$field->name]);
+						$field->value = $field->parseInput($_POST[$field->name]);
 					} else {
-						$field->parseInput(NULL);
+						$field->value = $field->parseInput(NULL);
 					}
 				} catch(DingesFieldValidationException $e) {
 					$this->validationErrors[] = array('field' => $e->getField(), 'message' => $e->getMessage());
