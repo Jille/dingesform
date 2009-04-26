@@ -20,6 +20,7 @@
 			}
 			$field = new $class($name, $required, $label);
 			$this->addField($field);
+			return $field;
 		}
 
 		function addField($field) {
