@@ -32,9 +32,6 @@
 			parent::fillAttributes();
 
 			$this->setAttribute('type', 'radio');
-			if($this->getEffectiveValue()) {
-				$this->setAttribute('checked', 'checked');
-			}
 			if($this->required) {
 				$this->setAttribute('required', 'true');
 			}
