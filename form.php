@@ -92,7 +92,7 @@
 			throw new DingesException('You cannot read this property');
 		}
 
-		static function generateTag($element, $attributes = array(), $content = '') {
+		static function generateTag($element, $attributes = array(), $content = NULL) {
 			// XXX escaping
 			$out = '<'. $element .' ';
 			foreach($attributes as $name => $value) {
