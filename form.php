@@ -40,7 +40,7 @@
 						$field->parseInput(NULL);
 					}
 				} catch(DingesFieldValidationException $e) {
-					$this->validationErrors[] = $e;
+					$this->validationErrors[] = array('field' => $e->getField(), 'message' => $e->getMessage());
 				}
 			}
 		}
@@ -51,6 +51,21 @@
 
 		function isValid() {
 			return (count($this->validationErrors) == 0);
+		}
+
+		function getFirstValidationError() {
+			if(count($this->validationErrors) == 0) {
+				return false;
+			}
+			return $this->validationErrors[0]['message'];
+		}
+
+		function getValidationErrors() {
+			$errors = array();
+			foreach($this->validationErrors as $error) {
+				$errors[] = $error['message'];
+			}
+			return $errors;
 		}
 
 		function render() {

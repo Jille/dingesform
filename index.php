@@ -6,7 +6,6 @@
 	require('text.php');
 	require('checkbox.php');
 	require('submit.php');
-	require('validationexception.php');
 
 	$f = new DingesForm();
 	$name = $f->createInputField('text', 'name', true, 'Naam');
@@ -16,8 +15,6 @@
 
 	$f->render();
 
-	var_dump($f->isValid());
-
 	$strings = $f->getStrings();
 ?>
 <html>
@@ -25,6 +22,13 @@
 		<title>DingesForm - test</title>
 	</head>
 	<body>
+<?php if(!$f->isValid()) { ?>
+		<ul style="color: red">
+<?php foreach($f->getValidationErrors() as $error) { ?>
+			<li><?= $error ?></li>
+<?php } ?>
+		</ul>
+<?php } ?>
 		<?= $strings['form_start'] ?>
 		<table>
 			<tr>

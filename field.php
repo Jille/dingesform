@@ -66,4 +66,17 @@
 
 		abstract function render();
 	}
+
+	class DingesFieldValidationException extends Exception {
+		protected $field;
+
+		function __construct($field, $message) {
+			parent::__construct($message);
+			$this->field = $field;
+		}
+
+		function getField() {
+			return $this->field;
+		}
+	}
 ?>
