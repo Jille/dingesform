@@ -7,7 +7,12 @@
 		}
 
 		function createField($type, $name, $required, $label) {
-			$class = 'DingesFormField'. $type;
+			$class = 'Dinges'. $type .'Field';
+		/*
+			if(!is_subclass_of($class, 'DingesFormField')) {
+				throw new DingesException($type .' is not an subclass of DingesFormField');
+			}
+		*/
 			$field = new $class($name, $required, $label);
 			$this->addField($field);
 		}
@@ -19,12 +24,18 @@
 			$this->fields[$field->name] = $field;
 		}
 
+		function render() {
+			foreach($this->fields as $field) {
+				$this->strings['element_'. $field->name] = $field->render();
+				$this->strings['label_'. $field->name] = $field->label;
+			}
+		}
 
 		function getStrings() {
 			return $this->strings;
 		}
 	}
 
-	class DingesException {
+	class DingesException extends Exception {
 	}
 ?>

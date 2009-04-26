@@ -46,6 +46,7 @@
 				$out .= $name .'="'. $value .'" ';
 			}
 			$out .= '/>';
+			return $out;
 		}
 
 		abstract function render();
