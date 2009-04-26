@@ -19,5 +19,9 @@
 			}
 			return DingesForm::generateTag($this->element, $this->attributes, $options);
 		}
+
+		function getLabelTag() {
+			return DingesForm::generateTag('span', array(), $this->label);
+		}
 	}
 ?>

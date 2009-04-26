@@ -74,6 +74,10 @@
 			return $this->$func();
 		}
 
+		function getLabelTag() {
+			return DingesForm::generateTag('label', array('for' => $this->id), $this->label);
+		}
+
 		/* Simple getters and setters */
 		function getName() {
 			return $this->name;

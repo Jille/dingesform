@@ -78,12 +78,12 @@
 		}
 
 		function render() {
-			$this->strings['form_start'] = '<form method="POST" action=".">';
-			$this->strings['form_end'] = '</form>';
+			$this->strings['form_open'] = '<form method="POST" action=".">';
+			$this->strings['form_close'] = '</form>';
 
 			foreach($this->fields as $field) {
 				$this->strings['element_'. $field->name] = $field->render();
-				$this->strings['label_'. $field->name] = $field->label;
+				$this->strings['label_'. $field->name] = $field->getLabelTag();
 				$this->strings['id_'. $field->name] = $this->fieldIdPrefix . $field->id;
 			}
 		}

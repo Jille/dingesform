@@ -44,7 +44,7 @@
 <?php } elseif($f->isSubmitted()) { ?>
 		<div style="color: green">OK!</div>
 <?php } ?>
-		<?= $strings['form_start'] ?>
+		<?= $strings['form_open'] ?>
 		<table>
 			<tr>
 				<td><?= $strings['label_name'] ?></td>
@@ -71,7 +71,7 @@
 				<td><?= $strings['element_subm'] ?></td>
 			</tr>
 		</table>
-		<?= $strings['form_end'] ?>
+		<?= $strings['form_close'] ?>
 		Strings:
 		<ul>
 <?php foreach(array_keys($strings) as $key) { ?>
