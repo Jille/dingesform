@@ -7,12 +7,16 @@
 	require('checkbox.php');
 	require('submit.php');
 	require('select.php');
+	require('textarea.php');
 
 	$f = new DingesForm();
 	$name = $f->createInputField('text', 'name', true, 'Naam');
+	$name->defaultValue = 'Henk';
 	$bla = $f->createInputField('checkbox', 'bla', false, 'Bla');
+	$bla->defaultValue = true;
 	$boink = $f->createInputField('select', 'boink', false, 'Boink');
 	$boink->options = array('bla', 'schaap');
+	$piet = $f->createInputField('textarea', 'piet', false, 'Piet');
 	$subm = new DingesSubmit('subm', 'Opsturen');
 	$f->addField($subm);
 
@@ -45,6 +49,10 @@
 			<tr>
 				<td><?= $strings['label_boink'] ?></td>
 				<td><?= $strings['element_boink'] ?></td>
+			</tr>
+			<tr>
+				<td><?= $strings['label_piet'] ?></td>
+				<td><?= $strings['element_piet'] ?></td>
 			</tr>
 			<tr>
 				<td></td>

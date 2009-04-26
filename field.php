@@ -43,6 +43,14 @@
 			}
 		}
 
+		function getValue() {
+			if(isset($this->f) && $this->f->isSubmitted()) {
+				return $this->value;
+			} else {
+				return $this->defaultValue;
+			}
+		}
+
 		function parseInput($value) {
 			return $value;
 		}

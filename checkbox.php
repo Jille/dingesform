@@ -18,6 +18,9 @@
 		function fillAttributes() {
 			parent::fillAttributes();
 			$this->setAttribute('type', 'checkbox');
+			if($this->getValue()) {
+				$this->setAttribute('checked', 'checked');
+			}
 			if($this->required) {
 				$this->setAttribute('required', 'true');
 			}
