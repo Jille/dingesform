@@ -91,6 +91,20 @@
 			}
 			throw new DingesException('You cannot read this property');
 		}
+
+		static function generateTag($element, $attributes = array(), $content = '') {
+			// XXX escaping
+			$out = '<'. $element .' ';
+			foreach($attributes as $name => $value) {
+				$out .= $name .'="'. $value .'" ';
+			}
+			if($content) {
+				$out .= '>'. $content .'</'. $element .'>';
+			} else {
+				$out .= '/>';
+			}
+			return $out;
+		}
 	}
 
 	class DingesException extends Exception {

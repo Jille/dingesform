@@ -6,10 +6,13 @@
 	require('text.php');
 	require('checkbox.php');
 	require('submit.php');
+	require('select.php');
 
 	$f = new DingesForm();
 	$name = $f->createInputField('text', 'name', true, 'Naam');
 	$bla = $f->createInputField('checkbox', 'bla', false, 'Bla');
+	$boink = $f->createInputField('select', 'boink', false, 'Boink');
+	$boink->options = array('bla', 'schaap');
 	$subm = new DingesSubmit('subm', 'Opsturen');
 	$f->addField($subm);
 
@@ -22,7 +25,7 @@
 		<title>DingesForm - test</title>
 	</head>
 	<body>
-<?php if(!$f->isValid()) { ?>
+<?php if($f->isSubmitted() && !$f->isValid()) { ?>
 		<ul style="color: red">
 <?php foreach($f->getValidationErrors() as $error) { ?>
 			<li><?= $error ?></li>
@@ -38,6 +41,10 @@
 			<tr>
 				<td><?= $strings['label_bla'] ?></td>
 				<td><?= $strings['element_bla'] ?></td>
+			</tr>
+			<tr>
+				<td><?= $strings['label_boink'] ?></td>
+				<td><?= $strings['element_boink'] ?></td>
 			</tr>
 			<tr>
 				<td></td>

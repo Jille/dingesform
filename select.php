@@ -1,6 +1,9 @@
 <?php
 
-	class DingesCheckbox extends DingesInputField {
+	class DingesSelect extends DingesInputField {
+
+		protected $element = 'select';
+		public $options = array();
 
 		function __construct($name, $required, $label) {
 			parent::__construct($name, $required, $label);
@@ -21,6 +24,14 @@
 			if($this->required) {
 				$this->setAttribute('required', 'true');
 			}
+		}
+
+		function generateHTML() {
+			$options = '';
+			foreach($this->options as $option) {
+				$options .= DingesForm::generateTag('option', array('value' => $option), $option);
+			}
+			return DingesForm::generateTag($this->element, $this->attributes, $options);
 		}
 	}
 

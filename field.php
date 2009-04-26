@@ -52,16 +52,8 @@
 			$this->setAttribute('name', $this->name);
 		}
 
-		/**
-		 * generateHTML - genereert een tag zonder inhoud
-		 */
 		function generateHTML() {
-			$out = '<'. $this->element .' ';
-			foreach($this->attributes as $name => $value) {
-				$out .= $name .'="'. $value .'" ';
-			}
-			$out .= '/>';
-			return $out;
+			return DingesForm::generateTag($this->element, $this->attributes);
 		}
 
 		abstract function render();
