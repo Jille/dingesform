@@ -98,7 +98,7 @@
 			foreach($attributes as $name => $value) {
 				$out .= $name .'="'. $value .'" ';
 			}
-			if($content) {
+			if($content !== NULL) {
 				$out .= '>'. $content .'</'. $element .'>';
 			} else {
 				$out .= '/>';
