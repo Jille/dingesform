@@ -8,12 +8,11 @@
 			$this->required = $required;
 		}
 
-		function parseInput($value) {
+		function validate($value) {
 			if($this->required && !$value) {
-				throw new DingesFieldValidationException('FIELD_REQUIRED', $this, $this->label .' is required');
+				return 'ERR_EMPTY';
 			}
-			return $value;
+			return true;
 		}
 	}
-
 ?>

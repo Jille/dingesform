@@ -7,7 +7,7 @@
 
 		protected $isSubmitted;
 
-		private $validationErrors = array();
+		private $validationErrors;
 
 		function __construct() {
 			$this->isSubmitted = (count($_POST) > 0);
@@ -34,15 +34,18 @@
 			$field->_setForm($this);
 
 			if($this->isSubmitted) {
-				try {
-					// XXX als je een exception krijgt verandert hij $field->value niet; en wordt het veld leeg (of erger, de defaultValue); ik denk dat je dan de letterlijk ingevoerde waarde weer wilt tonen
-					if(isset($_POST[$field->name])) {
-						$field->value = $field->parseInput($_POST[$field->name]);
-					} else {
-						$field->value = $field->parseInput(NULL);
-					}
-				} catch(DingesFieldValidationException $e) {
-					$this->validationErrors[] = array('field' => $e->getField(), 'message' => $e->getMessage());
+				if(isset($_POST[$field->name])) {
+					$field->value = $field->parseInput($_POST[$field->name]);
+				} else {
+					$field->value = $field->parseInput(NULL);
+				}
+			}
+		}
+
+		function validate() {
+			foreach($this->fields as $field) {
+				if(($error = $field->validate($field->value)) !== true) {
+					$this->validationErrors[] = array('field' => $field, 'message' => $eerror());
 				}
 			}
 		}
@@ -52,17 +55,23 @@
 		}
 
 		function isValid() {
+			if(!is_array($this->validationErrors)) {
+				$this->validate();
+			}
 			return (count($this->validationErrors) == 0);
 		}
 
 		function getFirstValidationError() {
-			if(count($this->validationErrors) == 0) {
+			if(!$this->validationErrors) {
 				return false;
 			}
 			return $this->validationErrors[0]['message'];
 		}
 
 		function getValidationErrors() {
+			if($this->validationErrors === NULL) {
+				return false;
+			}
 			$errors = array();
 			foreach($this->validationErrors as $error) {
 				$errors[] = $error['message'];

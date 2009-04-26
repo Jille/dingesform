@@ -55,6 +55,10 @@
 			return $value;
 		}
 
+		function validate($value) {
+			return $value;
+		}
+
 		function fillAttributes() {
 			$this->setAttribute('id', $this->f->fieldIdPrefix . $this->id);
 			$this->setAttribute('name', $this->name);
