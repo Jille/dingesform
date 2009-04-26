@@ -11,7 +11,7 @@
 			if($valid !== true) {
 				return $valid;
 			}
-			if(!isset($this->options[$value])) {
+			if($value && !isset($this->options[$value])) {
 				return 'ERR_UNKNOWN_OPTION';
 			}
 			return true;
