@@ -14,6 +14,8 @@
 
 		protected $valid = NULL;
 
+		protected $keepValue = true;
+
 		function __construct($name, $label) {
 			$this->name = $name;
 			$this->label = $label;
@@ -59,7 +61,7 @@
 		}
 
 		function getEffectiveValue() {
-			if($this->f->isSubmitted()) {
+			if($this->f->isSubmitted() && $this->keepValue) {
 				return $this->value;
 			} else {
 				return $this->defaultValue;
@@ -128,6 +130,14 @@
 
 		function setDefaultValue($value) {
 			$this->defaultValue = $value;
+		}
+
+		function getKeepValue() {
+			return $this->keepValue;
+		}
+
+		function setKeepValue($value) {
+			$this->keepValue = $value;
 		}
 	}
 ?>

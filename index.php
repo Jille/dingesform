@@ -9,6 +9,7 @@
 	require('select.php');
 	require('textarea.php');
 	require('integer.php');
+	require('password.php');
 
 	$f = new DingesForm();
 
@@ -36,6 +37,8 @@
 	$bier->addItem('leffe', 'Leffe');
 	$bier->addItem('latrappe', 'La Trappe');
 	$bier->setAttribute('size', 4);
+
+	$pass = $f->createInputField('password', 'pass', false, 'Wachtwoord');
 
 	$subm = new DingesSubmit('subm', 'Opst"uren');
 	$f->addField($subm);
@@ -91,6 +94,10 @@
 			<tr>
 				<td><?= $strings['label_bier'] ?></td>
 				<td><?= $strings['element_bier'] ?></td>
+			</tr>
+			<tr>
+				<td><?= $strings['label_pass'] ?></td>
+				<td><?= $strings['element_pass'] ?></td>
 			</tr>
 			<tr>
 				<td></td>
