@@ -35,6 +35,10 @@
 				$this->strings['label_'. $field->name] = '<label for="'. $field->id .'">'. $field->label .'</label>';
 			}
 		}
+
+		function getStrings() {
+			return $this->strings;
+		}
 	}
 
 	class DingesException {
