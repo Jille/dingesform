@@ -87,21 +87,21 @@
 
 		function __get($key) {
 			if(in_array($key, array('fieldIdPrefix'))) {
-				return $key;
+				return $this->$key;
 			}
 			throw new DingesException('You cannot read this property');
 		}
 
 		static function generateTag($element, $attributes = array(), $content = NULL) {
 			// XXX escaping
-			$out = '<'. $element .' ';
+			$out = '<'. $element;
 			foreach($attributes as $name => $value) {
-				$out .= $name .'="'. $value .'" ';
+				$out .= ' '. $name .'="'. $value .'"';
 			}
 			if($content !== NULL) {
 				$out .= '>'. $content .'</'. $element .'>';
 			} else {
-				$out .= '/>';
+				$out .= ' />';
 			}
 			return $out;
 		}

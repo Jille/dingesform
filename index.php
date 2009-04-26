@@ -15,7 +15,9 @@
 	$bla = $f->createInputField('checkbox', 'bla', false, 'Bla');
 	$bla->defaultValue = true;
 	$boink = $f->createInputField('select', 'boink', false, 'Boink');
-	$boink->options = array('bla', 'schaap');
+	$boink->addItem('bla', 'bla');
+	$boink->addItem('schaap', 'schaap');
+	$boink->addItem('50', '&euro; 50,-');
 	$piet = $f->createInputField('textarea', 'piet', false, 'Piet');
 	$subm = new DingesSubmit('subm', 'Opsturen');
 	$f->addField($subm);

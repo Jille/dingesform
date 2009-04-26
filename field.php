@@ -44,7 +44,7 @@
 		}
 
 		function getValue() {
-			if(isset($this->f) && $this->f->isSubmitted()) {
+			if($this->f->isSubmitted()) {
 				return $this->value;
 			} else {
 				return $this->defaultValue;
