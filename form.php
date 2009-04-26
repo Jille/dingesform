@@ -19,22 +19,6 @@
 			$this->fields[$field->name] = $field;
 		}
 
-		function generateFieldsHTML() {
-			// XXX deze hele functie mist escaping
-			foreach($this->fields as $field) {
-				$this->strings['element_'. $field->name] = '<'. $field->element;
-				foreach($field->attributes as $attribute => $value) {
-					$this->strings['element_'. $field->name] .= ' '. $attribute .'="'. $value .'"';
-				}
-				if($field->content) { // XXX iets met (default)value
-					$this->strings['element_'. $field->name] .= '>'. $this->content .'</'. $field->element .'>';
-				} else {
-					$this->strings['element_'. $field->name] .= ' />';
-				}
-
-				$this->strings['label_'. $field->name] = '<label for="'. $field->id .'">'. $field->label .'</label>';
-			}
-		}
 
 		function getStrings() {
 			return $this->strings;

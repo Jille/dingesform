@@ -1,7 +1,6 @@
 <?php
-	class DingesFormField {
+	abstract class DingesFormField {
 		private $name;
-		private $required;
 		private $label;
 
 		private $value = NULL;
@@ -9,6 +8,8 @@
 
 		private $element = 'input';
 		private $attributes = array();
+
+		private $required;
 
 		function __construct($name, $required, $label) {
 			$this->name = $name;
@@ -25,7 +26,7 @@
 				$this->$key = $value;
 				return;
 			}
-			throw new DingesException('You can not change this property');
+			throw new DingesException('You cannot change this property');
 		}
 
 		function setAttribute($name, $value, $append = false) {
@@ -35,5 +36,18 @@
 				$this->attributes[$name] = $value;
 			}
 		}
+
+		/**
+		 * generateHTML - genereert een tag zonder inhoud
+		 */
+		function generateHTML() {
+			$out = '<'. $this->element .' ';
+			foreach($this->attributes as $name => $value) {
+				$out .= $name .'="'. $value .'" ';
+			}
+			$out .= '/>';
+		}
+
+		abstract function render();
 	}
 ?>
