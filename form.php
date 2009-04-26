@@ -43,7 +43,10 @@
 		function validate() {
 			foreach($this->fields as $field) {
 				if(($error = $field->validate($field->value)) !== true) {
+					$field->_setValid(false);
 					$this->validationErrors[] = array('field' => $field, 'message' => $error);
+				} else {
+					$field->_setValid(true);
 				}
 			}
 		}
@@ -78,6 +81,9 @@
 		}
 
 		function render() {
+			if(!is_array($this->validationErrors)) {
+				$this->validate();
+			}
 			$this->strings['form_open'] = '<form method="POST" action=".">';
 			$this->strings['form_close'] = '</form>';
 

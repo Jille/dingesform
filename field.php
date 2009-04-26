@@ -12,6 +12,8 @@
 		protected $element = 'input';
 		protected $attributes = array();
 
+		protected $valid = true;
+
 		function __construct($name, $label) {
 			$this->name = $name;
 			$this->label = $label;
@@ -30,6 +32,9 @@
 		function fillAttributes() {
 			$this->setAttribute('id', $this->f->fieldIdPrefix . $this->id);
 			$this->setAttribute('name', $this->name);
+			if(!$this->valid) {
+				$this->setAttribute('class', 'dingesError');
+			}
 		}
 
 		function generateHTML() {
@@ -75,7 +80,21 @@
 		}
 
 		function getLabelTag() {
-			return DingesForm::generateTag('label', array('for' => $this->id), $this->label);
+			$attributes = array();
+			$attributes['for'] = $this->id;
+			$attributes['id'] = 'label_'. $this->id;
+			if(!$this->valid) {
+				$attributes['class'] = 'dingesErrorLabel';
+			}
+			return DingesForm::generateTag('label', $attributes, $this->label);
+		}
+
+		function _setValid($bool) {
+			$this->valid = $bool;
+		}
+
+		function isValid() {
+			return $this->valid;
 		}
 
 		/* Simple getters and setters */

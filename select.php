@@ -22,7 +22,13 @@
 
 		// IE (iig 6) selecteert het eerste element als je op het label klikt
 		function getLabelTag() {
-			return DingesForm::generateTag('span', array(), $this->label);
+			$attributes = array();
+			$attributes['for'] = $this->id;
+			$attributes['id'] = 'label_'. $this->id;
+			if(!$this->valid) {
+				$attributes['class'] = 'dingesErrorLabel';
+			}
+			return DingesForm::generateTag('span', $attributes, $this->label);
 		}
 	}
 ?>

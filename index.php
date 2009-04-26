@@ -34,6 +34,14 @@
 <html>
 	<head>
 		<title>DingesForm - test</title>
+		<style type="text/css">
+			.dingesError {
+				border: 1px dotted red;
+			}
+			.dingesErrorLabel {
+				color: red;
+			}
+		</style>
 	</head>
 	<body>
 <?php if($f->isSubmitted() && !$f->isValid()) { ?>
