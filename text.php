@@ -8,6 +8,18 @@
 			parent::__construct($name, $required, $label);
 		}
 
+		function parseInput($value) {
+			try {
+				parent::parseInput($value);
+			} catch(DingesFieldValidationException $e) {
+				throw($e);
+			}
+			if($this->maxLength && strlen($value) > $this->maxLength) {
+				throw new DingesFieldValidationException('FIELD_OVER_MAXLENGTH', $this, $this->label .' should be at most '. $this->maxLength .' characters long');
+			}
+			return $value;
+		}
+
 		function render() {
 			$this->fillAttributes();
 			return $this->generateHTML();

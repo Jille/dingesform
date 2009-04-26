@@ -10,15 +10,10 @@
 
 		function parseInput($value) {
 			if($this->required && !$value) {
-				throw new DingesInputFieldEmptyException($this);
+				throw new DingesFieldValidationException('FIELD_REQUIRED', $this, $this->label .' is required');
 			}
 			return $value;
 		}
 	}
 
-	class DingesInputFieldEmptyException extends DingesFieldValidationException {
-		function __construct($field) {
-			parent::__construct($field, $field->name.' is required');
-		}
-	}
 ?>
