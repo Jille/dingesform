@@ -6,6 +6,7 @@
 	require('text.php');
 	require('checkbox.php');
 	require('submit.php');
+	require('validationexception.php');
 
 	$f = new DingesForm();
 	$name = $f->createInputField('text', 'name', true, 'Naam');
@@ -14,6 +15,8 @@
 	$f->addField($subm);
 
 	$f->render();
+
+	var_dump($f->isValid());
 
 	$strings = $f->getStrings();
 ?>

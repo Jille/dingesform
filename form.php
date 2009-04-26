@@ -5,7 +5,12 @@
 
 		protected $fieldIdPrefix = '';
 
+		protected $isSubmitted;
+
+		private $validationErrors = array();
+
 		function __construct() {
+			$this->isSubmitted = (count($_POST) > 0);
 		}
 
 		function createInputField($type, $name, $required, $label) {
@@ -26,16 +31,26 @@
 			}
 			$this->fields[$field->name] = $field;
 			$field->_setForm($this);
-		}
 
-		function parseSubmittedData() {
-			foreach($this->fields as $field) {
-				if(isset($_POST[$field->name])) {
-					$field->parseInput($_POST[$field->name]);
-				} else {
-					$field->parseInput(NULL);
+			if($this->isSubmitted) {
+				try {
+					if(isset($_POST[$field->name])) {
+						$field->parseInput($_POST[$field->name]);
+					} else {
+						$field->parseInput(NULL);
+					}
+				} catch(DingesFieldValidationException $e) {
+					$this->validationErrors[] = $e;
 				}
 			}
+		}
+
+		function isSubmitted() {
+			return $this->isSubmitted;
+		}
+
+		function isValid() {
+			return (count($this->validationErrors) == 0);
 		}
 
 		function render() {
