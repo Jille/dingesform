@@ -7,8 +7,8 @@
 		}
 
 		function createField($type, $name, $required, $label) {
-			$class = 'Dinges'. $type .'Field';
-			if(!is_subclass_of($class, 'DingesFormField')) {
+			$class = 'Dinges'. $type;
+			if(!is_subclass_of($class, 'DingesField')) {
 				throw new DingesException($type .' is not an subclass of DingesFormField');
 			}
 			$field = new $class($name, $required, $label);
@@ -16,7 +16,7 @@
 		}
 
 		function addField($field) {
-			if(!is_object($field) || !$field instanceof DingesFormField) {
+			if(!is_object($field) || !$field instanceof DingesField) {
 				throw new DingesException('Invalid field given to addField()');
 			}
 			if(isset($this->fields[$field->name])) {

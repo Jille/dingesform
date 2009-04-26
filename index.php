@@ -14,7 +14,6 @@
 <html>
 	<head>
 		<title>DingesForm - test</title>
-		<script type="text/javascript" src="forms.js"></script>
 	</head>
 	<body>
 		<table>

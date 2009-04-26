@@ -1,5 +1,5 @@
 <?php
-	abstract class DingesFormField {
+	abstract class DingesField {
 		private $name;
 		private $label;
 

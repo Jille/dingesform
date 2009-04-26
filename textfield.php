@@ -1,6 +1,6 @@
 <?php
 
-	class DingesTextField extends DingesFormField {
+	class DingesText extends DingesField {
 
 		private $maxLength;
 		
