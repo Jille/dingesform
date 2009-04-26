@@ -1,6 +1,6 @@
 <?php
 	abstract class DingesField {
-		private $f;
+		protected $f;
 
 		protected $name;
 		protected $label;
@@ -20,7 +20,6 @@
 			$this->name = $name;
 			$this->label = $label;
 
-			// XXX prefixen met fieldIdPrefix
 			$this->id = $name;
 		}
 
@@ -58,9 +57,7 @@
 		}
 
 		function deleteAttribute($name) {
-			if(isset($this->attributes[$name])) {
-				unset($this->attributes[$name]);
-			}
+			unset($this->attributes[$name]);
 		}
 
 		function getAttribute($name) {
@@ -90,8 +87,8 @@
 
 		function getLabelTag() {
 			$attributes = array();
-			$attributes['for'] = $this->id;
-			$attributes['id'] = 'label_'. $this->id;
+			$attributes['for'] = $this->f->fieldIdPrefix . $this->id;
+			$attributes['id'] = $this->f->fieldIdPrefix .'label_'. $this->id;
 			if($this->isValid() === false) {
 				$attributes['class'] = 'dingesErrorLabel';
 			}

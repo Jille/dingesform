@@ -13,9 +13,8 @@
 	require('radiobutton.php');
 	require('static.php');
 
-	var_dump($_POST);
-
 	$f = new DingesForm();
+	$f->setFieldIdPrefix('blaat_');
 
 	$name = $f->createInputField('text', 'name', true, 'Naam');
 	$name->setDefaultValue('Henk"ie"');

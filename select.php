@@ -40,8 +40,7 @@
 		// IE (iig 6) selecteert het eerste element als je op het label klikt
 		function getLabelTag() {
 			$attributes = array();
-			$attributes['for'] = $this->id;
-			$attributes['id'] = 'label_'. $this->id;
+			$attributes['id'] = $this->f->fieldIdPrefix .'label_'. $this->id;
 			if($this->isValid() === false) {
 				$attributes['class'] = 'dingesErrorLabel';
 			}
