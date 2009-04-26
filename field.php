@@ -12,7 +12,7 @@
 		protected $element = 'input';
 		protected $attributes = array();
 
-		protected $valid = true;
+		protected $valid = NULL;
 
 		function __construct($name, $label) {
 			$this->name = $name;
@@ -32,7 +32,7 @@
 		function fillAttributes() {
 			$this->setAttribute('id', $this->f->fieldIdPrefix . $this->id);
 			$this->setAttribute('name', $this->name);
-			if(!$this->valid) {
+			if($this->isValid() === false) {
 				$this->setAttribute('class', 'dingesError');
 			}
 		}
@@ -83,7 +83,7 @@
 			$attributes = array();
 			$attributes['for'] = $this->id;
 			$attributes['id'] = 'label_'. $this->id;
-			if(!$this->valid) {
+			if($this->isValid() === false) {
 				$attributes['class'] = 'dingesErrorLabel';
 			}
 			return DingesForm::generateTag('label', $attributes, $this->label);

@@ -25,7 +25,7 @@
 			$attributes = array();
 			$attributes['for'] = $this->id;
 			$attributes['id'] = 'label_'. $this->id;
-			if(!$this->valid) {
+			if($this->isValid() === false) {
 				$attributes['class'] = 'dingesErrorLabel';
 			}
 			return DingesForm::generateTag('span', $attributes, $this->label);
