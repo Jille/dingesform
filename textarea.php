@@ -32,7 +32,7 @@
 		function generateHTML() {
 			$content = '';
 			if($this->getValue()) {
-				$content = $this->gteValue();
+				$content = $this->getValue();
 			}
 			return DingesForm::generateTag($this->element, $this->attributes, $content);
 		}
