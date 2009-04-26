@@ -1,32 +1,19 @@
 <?php
-
 	class DingesTextarea extends DingesInputField {
-
 		protected $maxLength;
 		protected $cols = 60;
 		protected $rows = 4;
 
 		protected $element = 'textarea';
 		
-		function __construct($name, $required, $label) {
-			parent::__construct($name, $required, $label);
-		}
-
-		function render() {
-			$this->fillAttributes();
-			return $this->generateHTML();
-		}
-
 		function parseInput($value) {
-			try {
-				parent::parseInput($value);
-			} catch(DingesFieldValidationException $e) {
-				throw($e);
+			if(($error = parent::parseInput($value)) !== true) {
+				return $error;
 			}
 			if($this->maxLength && strlen($value) > $this->maxLength) {
-				throw new DingesFieldValidationException('FIELD_OVER_MAXLENGTH', $this, $this->label .' should be at most '. $this->maxLength .' characters long');
+				return 'ERR_OVER_MAXLENGTH';
 			}
-			return $value;
+			return true;
 		}
 
 		function fillAttributes() {
@@ -39,12 +26,10 @@
 		}
 
 		function generateHTML() {
-			$content = '';
-			if($this->getValue()) {
-				$content = $this->getValue();
+			if(!$content = $this->getEffectiveValue()) {
+				$content = '';
 			}
 			return DingesForm::generateTag($this->element, $this->attributes, $content);
 		}
 	}
-
 ?>

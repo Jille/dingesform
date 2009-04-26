@@ -1,34 +1,21 @@
 <?php
-
 	class DingesText extends DingesInputField {
-
 		protected $maxLength;
 		
-		function __construct($name, $required, $label) {
-			parent::__construct($name, $required, $label);
-		}
-
-		function parseInput($value) {
-			try {
-				parent::parseInput($value);
-			} catch(DingesFieldValidationException $e) {
-				throw($e);
+		function validate($value) {
+			if(($error = parent::validate($value)) !== true) {
+				return $error;
 			}
 			if($this->maxLength && strlen($value) > $this->maxLength) {
-				throw new DingesFieldValidationException('FIELD_OVER_MAXLENGTH', $this, $this->label .' should be at most '. $this->maxLength .' characters long');
+				return 'ERR_OVER_MAXLENGTH';
 			}
-			return $value;
-		}
-
-		function render() {
-			$this->fillAttributes();
-			return $this->generateHTML();
+			return true;
 		}
 
 		function fillAttributes() {
 			parent::fillAttributes();
 			$this->setAttribute('type', 'text');
-			$this->setAttribute('value', $this->getValue());
+			$this->setAttribute('value', $this->getEffectiveValue());
 			if($this->required) {
 				$this->setAttribute('required', 'true');
 			}
@@ -37,5 +24,4 @@
 			}
 		}
 	}
-
 ?>

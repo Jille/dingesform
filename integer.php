@@ -1,31 +1,39 @@
 <?php
-
-	class DingesInteger extends DingesTExt {
-
+	class DingesInteger extends DingesText {
 		protected $min;
 		protected $max;
 
-		function __construct($name, $required, $label) {
-			parent::__construct($name, $required, $label);
-		}
-
-		function parseInput($value) {
-			try {
-				parent::parseInput($value);
-			} catch(DingesFieldValidationException $e) {
-				throw($e);
+		function validate($value) {
+			if(($error = parent::validate($value)) !== true) {
+				return $error;
 			}
 			if(!ctype_digit($value)) {
-				throw new DingesFieldValidationException('FIELD_NON_INTEGER', $this, $this->label .' should be an integer');
+				return 'ERR_NON_INTEGER';
 			}
-			if($this->min && $value > $this->min) {
-				throw new DingesFieldValidationException('FIELD_OVER_MIN', $this, $this->label .' should be at least '. $this->min);
+			if($this->min !== NULL && $value < $this->min) {
+				return 'ERR_UNDER_MIN';
 			}
-			if($this->max && $value > $this->max) {
-				throw new DingesFieldValidationException('FIELD_OVER_MAX', $this, $this->label .' should be at most '. $this->max);
+			if($this->max !== NULL && $value > $this->max) {
+				return 'ERR_OVER_MAX';
 			}
-			return $value;
+			return true;
+		}
+
+		/* Simple getters and setters */
+		function getMin() {
+			return $this->min;
+		}
+
+		function setMin($value) {
+			$this->min = $value;
+		}
+
+		function getMax() {
+			return $this->max;
+		}
+
+		function setMax($value) {
+			$this->max = $value;
 		}
 	}
-
 ?>

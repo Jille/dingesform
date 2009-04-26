@@ -7,7 +7,7 @@
 
 		protected $isSubmitted;
 
-		private $validationErrors;
+		protected $validationErrors;
 
 		function __construct() {
 			$this->isSubmitted = (count($_POST) > 0);
@@ -35,9 +35,7 @@
 
 			if($this->isSubmitted) {
 				if(isset($_POST[$field->name])) {
-					$field->value = $field->parseInput($_POST[$field->name]);
-				} else {
-					$field->value = $field->parseInput(NULL);
+					$field->_setValue($_POST[$field->name]);
 				}
 			}
 		}
@@ -45,7 +43,7 @@
 		function validate() {
 			foreach($this->fields as $field) {
 				if(($error = $field->validate($field->value)) !== true) {
-					$this->validationErrors[] = array('field' => $field, 'message' => $eerror());
+					$this->validationErrors[] = array('field' => $field, 'message' => $error);
 				}
 			}
 		}
@@ -94,13 +92,6 @@
 			return $this->strings;
 		}
 
-		function __get($key) {
-			if(in_array($key, array('fieldIdPrefix'))) {
-				return $this->$key;
-			}
-			throw new DingesException('You cannot read this property');
-		}
-
 		static function generateTag($element, $attributes = array(), $content = NULL) {
 			// XXX escaping
 			$out = '<'. $element;
@@ -113,6 +104,20 @@
 				$out .= ' />';
 			}
 			return $out;
+		}
+
+		function __get($key) {
+			$func = 'get'. $key;
+			return $this->$func();
+		}
+
+		/* Simple getters and setters */
+		function getFieldIdPrefix() {
+			return $this->fieldIdPrefix;
+		}
+
+		function setFieldIdPrefix($value) {
+			$this->fieldIdPrefix = $value;
 		}
 	}
 

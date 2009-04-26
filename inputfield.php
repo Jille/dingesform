@@ -1,5 +1,4 @@
 <?php
-
 	abstract class DingesInputField extends DingesField {
 		protected $required;
 
@@ -13,6 +12,15 @@
 				return 'ERR_EMPTY';
 			}
 			return true;
+		}
+
+		/* Simple getters and setters */
+		function getRequired() {
+			return $this->required;
+		}
+
+		function setRequired($value) {
+			$this->required = $value;
 		}
 	}
 ?>

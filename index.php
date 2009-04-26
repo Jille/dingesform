@@ -12,17 +12,17 @@
 
 	$f = new DingesForm();
 	$name = $f->createInputField('text', 'name', true, 'Naam');
-	$name->defaultValue = 'Henk';
+	$name->setDefaultValue('Henk');
 	$bla = $f->createInputField('checkbox', 'bla', false, 'Bla');
-	$bla->defaultValue = true;
+	$bla->setDefaultValue(true);
 	$boink = $f->createInputField('select', 'boink', false, 'Boink');
 	$boink->addItem('bla', 'bla');
 	$boink->addItem('schaap', 'schaap');
 	$boink->addItem('50', '&euro; 50,-');
 	$piet = $f->createInputField('textarea', 'piet', false, 'Piet');
 	$int = $f->createInputField('integer', 'int', true, 'Int');
-	$int->min = 10;
-	$int->max = 100;
+	$int->setMin(10);
+	$int->setMax(100);
 	$subm = new DingesSubmit('subm', 'Opsturen');
 	$f->addField($subm);
 
@@ -41,6 +41,8 @@
 			<li><?= $error ?></li>
 <?php } ?>
 		</ul>
+<?php } elseif($f->isSubmitted()) { ?>
+		<div style="color: green">OK!</div>
 <?php } ?>
 		<?= $strings['form_start'] ?>
 		<table>

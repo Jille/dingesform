@@ -19,44 +19,12 @@
 			$this->id = $name;
 		}
 
-		function _setForm($f) {
-			$this->f = $f;
-		}
-
-		function __get($key) {
-			return $this->$key;
-		}
-
-		function __set($key, $value) {
-			if(in_array($key, array('defaultValue', 'value', 'id', 'min', 'max', 'maxLength'))) {
-				$this->$key = $value;
-				return;
-			}
-			throw new DingesException('You cannot change this property');
-		}
-
-		function setAttribute($name, $value, $append = false) {
-			if($append && isset($this->attributes[$name])) {
-				$this->attributes[$name] .= $value;
-			} else {
-				$this->attributes[$name] = $value;
-			}
-		}
-
-		function getValue() {
-			if($this->f->isSubmitted()) {
-				return $this->value;
-			} else {
-				return $this->defaultValue;
-			}
-		}
-
 		function parseInput($value) {
 			return $value;
 		}
 
 		function validate($value) {
-			return $value;
+			return true;
 		}
 
 		function fillAttributes() {
@@ -68,7 +36,76 @@
 			return DingesForm::generateTag($this->element, $this->attributes);
 		}
 
-		abstract function render();
+		function render() {
+			$this->fillAttributes();
+			return $this->generateHTML();
+		}
+
+		function setAttribute($name, $value, $append = false) {
+			if($append && isset($this->attributes[$name])) {
+				$this->attributes[$name] .= $value;
+			} else {
+				$this->attributes[$name] = $value;
+			}
+		}
+
+		function getAttribute($name) {
+			return $this->attributes[$name];
+		}
+
+		function getEffectiveValue() {
+			if($this->f->isSubmitted()) {
+				return $this->value;
+			} else {
+				return $this->defaultValue;
+			}
+		}
+
+		function _setForm($f) {
+			$this->f = $f;
+		}
+
+		function _setValue($value) {
+			$this->value = $value;
+		}
+
+		function __get($key) {
+			$func = 'get'. $key;
+			return $this->$func();
+		}
+
+		/* Simple getters and setters */
+		function getName() {
+			return $this->name;
+		}
+
+		function getLabel() {
+			return $this->label;
+		}
+
+		function setLabel($value) {
+			$this->label = $value;
+		}
+
+		function getId() {
+			return $this->id;
+		}
+
+		function setId($value) {
+			$this->id = $value;
+		}
+
+		function getValue() {
+			return $this->value;
+		}
+
+		function getDefaultValue() {
+			return $this->defaultValue;
+		}
+
+		function setDefaultValue($value) {
+			$this->defaultValue = $value;
+		}
 	}
 
 	class DingesFieldValidationException extends Exception {
