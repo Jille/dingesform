@@ -81,7 +81,7 @@
 		}
 
 		function render() {
-			if(!is_array($this->validationErrors)) {
+			if($this->isSubmitted() && !is_array($this->validationErrors)) {
 				$this->validate();
 			}
 			$this->strings['form_open'] = '<form method="POST" action=".">';
