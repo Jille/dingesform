@@ -1,17 +1,17 @@
 <?php
 	class DingesForm {
-		private $fields = array();
-		private $strings = array();
+		protected $fields = array();
+		protected $strings = array();
 
-		private $fieldIdPrefix = '';
+		protected $fieldIdPrefix = '';
 
 		function __construct() {
 		}
 
-		function createField($type, $name, $required, $label) {
+		function createInputField($type, $name, $required, $label) {
 			$class = 'Dinges'. $type;
-			if(!is_subclass_of($class, 'DingesField')) {
-				throw new DingesException($type .' is not an subclass of DingesFormField');
+			if(!is_subclass_of($class, 'DingesInputField')) {
+				throw new DingesException($type .' is not an subclass of DingesInputField');
 			}
 			$field = new $class($name, $required, $label);
 			$this->addField($field);

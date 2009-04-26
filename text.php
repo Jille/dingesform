@@ -2,7 +2,7 @@
 
 	class DingesText extends DingesInputField {
 
-		private $maxLength;
+		protected $maxLength;
 		
 		function __construct($name, $required, $label) {
 			parent::__construct($name, $required, $label);

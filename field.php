@@ -2,15 +2,15 @@
 	abstract class DingesField {
 		private $f;
 
-		private $name;
-		private $label;
-		private $id;
+		protected $name;
+		protected $label;
+		protected $id;
 
-		private $value = NULL;
-		private $defaultValue = NULL;
+		protected $value = NULL;
+		protected $defaultValue = NULL;
 
-		private $element = 'input';
-		private $attributes = array();
+		protected $element = 'input';
+		protected $attributes = array();
 
 		function __construct($name, $label) {
 			$this->name = $name;

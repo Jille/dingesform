@@ -1,9 +1,9 @@
 <?php
 
-	class SubmitTextField extends DingesField {
+	class DingesSubmit extends DingesField {
 
 		function __construct($name, $label) {
-			parent::__construct($name, NULL, $label);
+			parent::__construct($name, $label);
 		}
 
 		function render() {

@@ -2,11 +2,14 @@
 	error_reporting(E_ALL);
 	require('form.php');
 	require('field.php');
-	require('textfield.php');
+	require('inputfield.php');
+	require('text.php');
+	require('submit.php');
 
 	$f = new DingesForm();
-	$name = $f->createField('text', 'name', true, 'Naam');
-	$subm = $f->createField('submit', 'subm', 'Opsturen');
+	$name = $f->createInputField('text', 'name', true, 'Naam');
+	$subm = new DingesSubmit('subm', 'Opsturen');
+	$f->addField($subm);
 
 	$f->render();
 

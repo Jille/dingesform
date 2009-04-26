@@ -1,7 +1,7 @@
 <?php
 
 	abstract class DingesInputField extends DingesField {
-		private $required;
+		protected $required;
 
 		function __construct($name, $required, $label) {
 			parent::__construct($name, $label);
