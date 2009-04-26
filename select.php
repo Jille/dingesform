@@ -3,14 +3,31 @@
 		protected $element = 'select';
 		protected $options = array();
 
-		function addItem($value, $content) {
-			$this->options[] = array('value' => $value, 'content' => htmlspecialchars($content, ENT_NOQUOTES, NULL, false));
+		function addItem($value, $content, $optgroup = NULL) {
+			$option = array('value' => $value, 'content' => htmlspecialchars($content, ENT_NOQUOTES, NULL, false));
+			if($optgroup) {
+				$this->options[$optgroup][] = $option;
+			} else {
+				$this->options[] = $option;
+			}
 		}
 
 		function generateHTML() {
 			$value = $this->getEffectiveValue();
 			$options = '';
-			foreach($this->options as $option) {
+			foreach($this->options as $i=>$option) {
+				if(!isset($option['value'])) {
+					$optgroup = '';
+					foreach($option as $suboption) {
+						$attributes = array('value' => $suboption['value']);
+						if($suboption['value'] == $value) {
+							$attributes['selected'] = 'selected';
+						}
+						$optgroup .= DingesForm::generateTag('option', $attributes, $suboption['content']);
+					}
+					$options .= DingesForm::generateTag('optgroup', array('label' => $i), $optgroup);
+					continue;
+				}
 				$attributes = array('value' => $option['value']);
 				if($option['value'] == $value) {
 					$attributes['selected'] = 'selected';

@@ -20,6 +20,7 @@
 			$this->name = $name;
 			$this->label = $label;
 
+			// XXX prefixen met fieldIdPrefix
 			$this->id = $name;
 		}
 

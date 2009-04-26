@@ -34,7 +34,7 @@
 
 	$bier = $f->createInputField('select', 'bier', true, 'Bieren');
 	$bier->addItem('hertogjan', 'Hertog Jan');
-	$bier->addItem('heineken', '<s>Heineken</s>');
+	$bier->addItem('heineken', '<s>Heineken</s>', 'slootwater');
 	$bier->addItem('leffe', 'Leffe');
 	$bier->addItem('latrappe', 'La Trappe');
 	$bier->setAttribute('size', 4);
