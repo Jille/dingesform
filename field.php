@@ -12,11 +12,8 @@
 		private $element = 'input';
 		private $attributes = array();
 
-		private $required;
-
-		function __construct($name, $required, $label) {
+		function __construct($name, $label) {
 			$this->name = $name;
-			$this->required = $required;
 			$this->label = $label;
 
 			$this->id = $name;

@@ -39,6 +39,9 @@
 		}
 
 		function render() {
+			$this->strings['form_start'] = '<form method="POST" action=".">';
+			$this->strings['form_end'] = '</form>';
+
 			foreach($this->fields as $field) {
 				$this->strings['element_'. $field->name] = $field->render();
 				$this->strings['label_'. $field->name] = $field->label;
