@@ -1,7 +1,10 @@
 <?php
 	abstract class DingesField {
+		private $f;
+
 		private $name;
 		private $label;
+		private $id;
 
 		private $value = NULL;
 		private $defaultValue = NULL;
@@ -15,6 +18,12 @@
 			$this->name = $name;
 			$this->required = $required;
 			$this->label = $label;
+
+			$this->id = $name;
+		}
+
+		function _setForm($f) {
+			$this->f = $f;
 		}
 
 		function __get($key) {
@@ -22,7 +31,7 @@
 		}
 
 		function __set($key, $value) {
-			if(in_array($key, array('defaultValue'))) {
+			if(in_array($key, array('defaultValue', 'id'))) {
 				$this->$key = $value;
 				return;
 			}
@@ -35,6 +44,10 @@
 			} else {
 				$this->attributes[$name] = $value;
 			}
+		}
+
+		function fillAttributes() {
+			$this->setAttribute('id', $this->f->fieldIdPrefix . $this->id);
 		}
 
 		/**

@@ -3,6 +3,8 @@
 		private $fields = array();
 		private $strings = array();
 
+		private $fieldIdPrefix = '';
+
 		function __construct() {
 		}
 
@@ -23,12 +25,24 @@
 				throw new DingesException('There is already a field with the name: '. $field->name);
 			}
 			$this->fields[$field->name] = $field;
+			$field->_setForm($this);
+		}
+
+		function parseSubmittedData() {
+			foreach($this->fields as $field) {
+				if(isset($_POST[$field->name])) {
+					$field->parseInput($_POST[$field->name]);
+				} else {
+					$field->parseInput(NULL);
+				}
+			}
 		}
 
 		function render() {
 			foreach($this->fields as $field) {
 				$this->strings['element_'. $field->name] = $field->render();
 				$this->strings['label_'. $field->name] = $field->label;
+				$this->strings['id_'. $field->name] = $this->fieldIdPrefix . $field->id;
 			}
 		}
 
