@@ -52,6 +52,13 @@
 		function getStrings() {
 			return $this->strings;
 		}
+
+		function __get($key) {
+			if(in_array($key, array('fieldIdPrefix'))) {
+				return $key;
+			}
+			throw new DingesException('You cannot read this property');
+		}
 	}
 
 	class DingesException extends Exception {

@@ -14,6 +14,7 @@
 		}
 
 		function fillAttributes() {
+			parent::fillAttributes();
 			$this->setAttribute('type', 'text');
 			if($this->required) {
 				$this->setAttribute('required', 'true');
