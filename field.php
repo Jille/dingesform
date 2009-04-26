@@ -111,23 +111,4 @@
 			$this->defaultValue = $value;
 		}
 	}
-
-	class DingesFieldValidationException extends Exception {
-		protected $type;
-		protected $field;
-
-		function __construct($type, $field, $message) {
-			parent::__construct($message);
-			$this->type = $type;
-			$this->field = $field;
-		}
-
-		function getField() {
-			return $this->field;
-		}
-
-		function getType() {
-			return $this->type;
-		}
-	}
 ?>

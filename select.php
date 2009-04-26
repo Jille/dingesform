@@ -20,6 +20,7 @@
 			return DingesForm::generateTag($this->element, $this->attributes, $options);
 		}
 
+		// IE (iig 6) selecteert het eerste element als je op het label klikt
 		function getLabelTag() {
 			return DingesForm::generateTag('span', array(), $this->label);
 		}
