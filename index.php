@@ -4,10 +4,12 @@
 	require('field.php');
 	require('inputfield.php');
 	require('text.php');
+	require('checkbox.php');
 	require('submit.php');
 
 	$f = new DingesForm();
 	$name = $f->createInputField('text', 'name', true, 'Naam');
+	$bla = $f->createInputField('checkbox', 'bla', false, 'Bla');
 	$subm = new DingesSubmit('subm', 'Opsturen');
 	$f->addField($subm);
 
@@ -25,6 +27,10 @@
 			<tr>
 				<td><?= $strings['label_name'] ?></td>
 				<td><?= $strings['element_name'] ?></td>
+			</tr>
+			<tr>
+				<td><?= $strings['label_bla'] ?></td>
+				<td><?= $strings['element_bla'] ?></td>
 			</tr>
 			<tr>
 				<td></td>
