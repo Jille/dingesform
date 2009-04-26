@@ -28,7 +28,7 @@
 		}
 
 		function __set($key, $value) {
-			if(in_array($key, array('defaultValue', 'value', 'id'))) {
+			if(in_array($key, array('defaultValue', 'value', 'id', 'min', 'max', 'maxLength'))) {
 				$this->$key = $value;
 				return;
 			}

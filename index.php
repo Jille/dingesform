@@ -8,6 +8,7 @@
 	require('submit.php');
 	require('select.php');
 	require('textarea.php');
+	require('integer.php');
 
 	$f = new DingesForm();
 	$name = $f->createInputField('text', 'name', true, 'Naam');
@@ -19,6 +20,9 @@
 	$boink->addItem('schaap', 'schaap');
 	$boink->addItem('50', '&euro; 50,-');
 	$piet = $f->createInputField('textarea', 'piet', false, 'Piet');
+	$int = $f->createInputField('integer', 'int', true, 'Int');
+	$int->min = 10;
+	$int->max = 100;
 	$subm = new DingesSubmit('subm', 'Opsturen');
 	$f->addField($subm);
 
@@ -55,6 +59,10 @@
 			<tr>
 				<td><?= $strings['label_piet'] ?></td>
 				<td><?= $strings['element_piet'] ?></td>
+			</tr>
+			<tr>
+				<td><?= $strings['label_int'] ?></td>
+				<td><?= $strings['element_int'] ?></td>
 			</tr>
 			<tr>
 				<td></td>
