@@ -10,6 +10,7 @@
 	require('textarea.php');
 	require('integer.php');
 	require('password.php');
+	require('static.php');
 
 	$f = new DingesForm();
 
@@ -39,6 +40,10 @@
 	$bier->setAttribute('size', 4);
 
 	$pass = $f->createInputField('password', 'pass', false, 'Wachtwoord');
+
+	$favbier = new DingesStatic('favbier', 'Favoriete bier');
+	$favbier->setDefaultValue('Hertog Jan');
+	$f->addField($favbier);
 
 	$subm = new DingesSubmit('subm', 'Opst"uren');
 	$f->addField($subm);
@@ -98,6 +103,10 @@
 			<tr>
 				<td><?= $strings['label_pass'] ?></td>
 				<td><?= $strings['element_pass'] ?></td>
+			</tr>
+			<tr>
+				<td><?= $strings['label_favbier'] ?></td>
+				<td><?= $strings['element_favbier'] ?></td>
 			</tr>
 			<tr>
 				<td></td>
