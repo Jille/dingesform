@@ -12,18 +12,19 @@
 
 	$f = new DingesForm();
 	$name = $f->createInputField('text', 'name', true, 'Naam');
-	$name->setDefaultValue('Henk');
+	$name->setDefaultValue('Henk"ie"');
 	$bla = $f->createInputField('checkbox', 'bla', false, 'Bla');
 	$bla->setDefaultValue(true);
-	$boink = $f->createInputField('select', 'boink', false, 'Boink');
-	$boink->addItem('bla', 'bla');
-	$boink->addItem('schaap', 'schaap');
+	$boink = $f->createInputField('select', 'boink', false, 'Bo&iuml;nk');
+	$boink->addItem('"bla"', '"bla"');
+	$boink->addItem('schaap', 'scha&euml;p');
 	$boink->addItem('50', '&euro; 50,-');
-	$piet = $f->createInputField('textarea', 'piet', false, 'Piet');
-	$int = $f->createInputField('integer', 'int', true, 'Int');
+	$piet = $f->createInputField('textarea', 'piet', false, 'Piet"je"');
+	$piet->setDefaultValue("lalala, \"BIER!\" <br>\n</textarea>");
+	$int = $f->createInputField('integer', 'int', true, 'Int<br>eger');
 	$int->setMin(10);
 	$int->setMax(100);
-	$subm = new DingesSubmit('subm', 'Opsturen');
+	$subm = new DingesSubmit('subm', 'Opst"uren');
 	$f->addField($subm);
 
 	$f->render();

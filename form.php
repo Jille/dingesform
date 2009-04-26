@@ -93,10 +93,9 @@
 		}
 
 		static function generateTag($element, $attributes = array(), $content = NULL) {
-			// XXX escaping
 			$out = '<'. $element;
 			foreach($attributes as $name => $value) {
-				$out .= ' '. $name .'="'. $value .'"';
+				$out .= ' '. $name .'="'. htmlspecialchars($value) .'"';
 			}
 			if($content !== NULL) {
 				$out .= '>'. $content .'</'. $element .'>';
