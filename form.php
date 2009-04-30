@@ -85,7 +85,9 @@
 			$this->strings['form_close'] = '</form>';
 
 			foreach($this->fields as $field) {
-				$this->strings['label_'. $field->name] = $field->getLabelTag();
+				if($field instanceof DingesLabelField) {
+					$this->strings['label_'. $field->name] = $field->getLabelTag();
+				}
 				if($field instanceof DingesMultipleElement) {
 					$this->strings = array_merge($this->strings, $field->render());
 				} else {

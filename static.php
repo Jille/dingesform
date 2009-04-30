@@ -1,5 +1,5 @@
 <?php
-	class DingesStatic extends DingesField {
+	class DingesStatic extends DingesLabelField {
 		function render() {
 			return DingesForm::generateTag('span', array('id' => $this->f->fieldIdPrefix . $this->id), $this->getDefaultValue());
 		}

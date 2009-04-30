@@ -1,5 +1,5 @@
 <?php
-	class DingesSubmit extends DingesField {
+	class DingesSubmit extends DingesLabelField {
 		function fillAttributes() {
 			parent::fillAttributes();
 			$this->setAttribute('type', 'submit');

@@ -2,6 +2,7 @@
 	error_reporting(E_ALL);
 	require('form.php');
 	require('field.php');
+	require('labelfield.php');
 	require('inputfield.php');
 	require('text.php');
 	require('checkbox.php');

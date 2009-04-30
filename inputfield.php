@@ -1,5 +1,5 @@
 <?php
-	abstract class DingesInputField extends DingesField {
+	abstract class DingesInputField extends DingesLabelField {
 		protected $required;
 
 		function __construct($name, $required, $label) {

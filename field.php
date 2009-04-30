@@ -3,7 +3,6 @@
 		protected $f;
 
 		protected $name;
-		protected $label;
 		protected $id;
 
 		protected $value = NULL;
@@ -16,11 +15,8 @@
 
 		protected $keepValue = true;
 
-		protected $realLabelTag = true;
-
-		function __construct($name, $label) {
+		function __construct($name) {
 			$this->name = $name;
-			$this->label = $label;
 
 			$this->id = $name;
 		}
@@ -84,22 +80,10 @@
 
 		function __get($key) {
 			$func = 'get'. $key;
+			if(!method_exists($this, $func)) {
+				throw new DingesException('Attempt to access property which has no getter ('. get_class($this) .'->'. $key .')');
+			}
 			return $this->$func();
-		}
-
-		function getLabelTag() {
-			$attributes = array();
-			if($this->realLabelTag) {
-				$element = 'label';
-				$attributes['for'] = $this->f->fieldIdPrefix . $this->id;
-			} else {
-				$element = 'span';
-			}
-			$attributes['id'] = $this->f->fieldIdPrefix .'label_'. $this->id;
-			if($this->isValid() === false) {
-				$attributes['class'] = 'dingesErrorLabel';
-			}
-			return DingesForm::generateTag($element, $attributes, $this->label);
 		}
 
 		function _setValid($bool) {
@@ -113,14 +97,6 @@
 		/* Simple getters and setters */
 		function getName() {
 			return $this->name;
-		}
-
-		function getLabel() {
-			return $this->label;
-		}
-
-		function setLabel($value) {
-			$this->label = $value;
 		}
 
 		function getId() {
