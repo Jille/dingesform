@@ -14,6 +14,13 @@
 			return true;
 		}
 
+		function fillAttributes() {
+			parent::fillAttributes();
+			if($this->required) {
+				$this->setAttribute('required', 'true');
+			}
+		}
+
 		/* Simple getters and setters */
 		function getRequired() {
 			return $this->required;

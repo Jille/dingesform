@@ -68,6 +68,12 @@
 <html>
 	<head>
 		<title>DingesForm - test</title>
+		<script type="text/javascript" src="js/forms.js"></script>
+		<script type="text/javascript">
+			function page_init() {
+				df = new DingesForm(document.forms[0]);
+			}
+		</script>
 		<style type="text/css">
 			.dingesError {
 				border: 1px dotted red;
@@ -77,7 +83,7 @@
 			}
 		</style>
 	</head>
-	<body>
+	<body onload="page_init();">
 <?php if($f->isSubmitted() && !$f->isValid()) { ?>
 		<ul style="color: red">
 <?php foreach($f->getValidationErrors() as $error) { ?>

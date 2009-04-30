@@ -30,11 +30,7 @@
 
 		function fillAttributes() {
 			parent::fillAttributes();
-
 			$this->setAttribute('type', 'radio');
-			if($this->required) {
-				$this->setAttribute('required', 'true');
-			}
 		}
 
 		function generateHTML($option) {

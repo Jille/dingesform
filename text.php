@@ -16,9 +16,6 @@
 			parent::fillAttributes();
 			$this->setAttribute('type', 'text');
 			$this->setAttribute('value', $this->getEffectiveValue());
-			if($this->required) {
-				$this->setAttribute('required', 'true');
-			}
 			if(isset($this->maxLength) && $this->maxLength > 0) {
 				$this->setAttribute('maxlength', $this->maxLength);
 			}

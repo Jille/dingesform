@@ -18,9 +18,6 @@
 
 		function fillAttributes() {
 			parent::fillAttributes();
-			if($this->required) {
-				$this->setAttribute('required', 'true');
-			}
 			$this->setAttribute('cols', $this->cols);
 			$this->setAttribute('rows', $this->rows);
 		}
