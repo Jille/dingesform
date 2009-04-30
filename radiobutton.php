@@ -3,7 +3,7 @@
 		protected $options = array();
 
 		function addItem($value, $content, $escape_html = true) {
-			$this->options[$value] = array('value' => $value, 'content' => htmlspecialchars($content, ENT_NOQUOTES, NULL, false));
+			$this->options[$value] = array('value' => $value, 'content' => htmlspecialchars($content, ENT_NOQUOTES, NULL, false), 'id' => $this->f->fieldIdPrefix .'id_radiobutton_'. $this->name .'_'. $value);
 		}
 
 		function validate($value) {
@@ -21,8 +21,8 @@
 			$this->fillAttributes();
 			$strings = array();
 			foreach($this->options as &$option) {
-				$strings['radio_'. $this->name .'_'. $option['value']] = $this->generateHTML($option);
-				$strings['radio_label_'. $this->name .'_'. $option['value']] = $this->getRadioLabelTag($option);
+				$strings['radiobutton_'. $this->name .'_'. $option['value']] = $this->generateHTML($option);
+				$strings['label_radiobutton_'. $this->name .'_'. $option['value']] = $this->getRadioLabelTag($option);
 			}
 			unset($option);
 			return $strings;
@@ -37,8 +37,7 @@
 			}
 		}
 
-		function generateHTML(&$option) {
-			$option['id'] = 'radio_id_'. $option['value'];
+		function generateHTML($option) {
 			$this->setAttribute('id', $option['id']);
 			$this->setAttribute('value', $option['value']);
 			if($option['value'] == $this->getEffectiveValue()) {
@@ -49,18 +48,20 @@
 			return DingesForm::generateTag('input', $this->attributes);
 		}
 
-		function getRadioLabelTag(&$option) {
+		function getRadioLabelTag($option) {
 			$attributes = array();
 			$attributes['for'] = $option['id'];
 			$attributes['id'] = 'label_'. $option['id'];
-			if($this->isValid() === false) {
-				$attributes['class'] = 'dingesErrorLabel';
-			}
 			return DingesForm::generateTag('label', $attributes, $option['content']);
 		}
 
 		function getLabelTag() {
-			return DingesForm::generateTag('span', array('id' => 'label'. $this->id), $this->label);
+			$attributes = array();
+			$attributes['id'] = $this->f->fieldIdPrefix .'label_'. $this->id;
+			if($this->isValid() === false) {
+				$attributes['class'] = 'dingesErrorLabel';
+			}
+			return DingesForm::generateTag('span', $attributes, $this->label);
 		}
 
 	}

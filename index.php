@@ -44,7 +44,7 @@
 
 	$pass = $f->createInputField('password', 'pass', false, 'Wachtwoord');
 
-	$jaofnee = $f->createInputField('radiobutton', 'jaofnee', false, 'Ja of Nee');
+	$jaofnee = $f->createInputField('radiobutton', 'jaofnee', true, 'Ja of Nee');
 	$jaofnee->addItem('ja', 'Ja');
 	$jaofnee->addItem('nee', 'Nee');
 
@@ -113,11 +113,11 @@
 			</tr>
 			<tr>
 				<td><?= $strings['label_jaofnee'] ?></td>
-				<td><?= $strings['radio_jaofnee_ja'] .' '. $strings['radio_label_jaofnee_ja'] ?></td>
+				<td><?= $strings['radiobutton_jaofnee_ja'] .' '. $strings['label_radiobutton_jaofnee_ja'] ?></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td><?= $strings['radio_jaofnee_nee'] .' '. $strings['radio_label_jaofnee_nee'] ?></td>
+				<td><?= $strings['radiobutton_jaofnee_nee'] .' '. $strings['label_radiobutton_jaofnee_nee'] ?></td>
 			</tr>
 			<tr>
 				<td><?= $strings['label_favbier'] ?></td>
