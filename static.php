@@ -5,7 +5,7 @@
 		}
 
 		function getLabelTag() {
-			return DingesForm::generateTag('span', array('id' => $this->f->fieldIdPrefix .'label_'. $this->id), $this->getDefaultValue());
+			return DingesForm::generateTag('span', array('id' => $this->f->fieldIdPrefix .'label_'. $this->id), $this->label);
 		}
 	}
 ?>
