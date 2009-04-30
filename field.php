@@ -144,4 +144,7 @@
 			$this->keepValue = $value;
 		}
 	}
+
+	interface DingesMultipleElement {
+	}
 ?>

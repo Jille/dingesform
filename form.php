@@ -89,7 +89,7 @@
 
 			foreach($this->fields as $field) {
 				$this->strings['label_'. $field->name] = $field->getLabelTag();
-				if($field instanceOf DingesRadioButton) {
+				if($field instanceof DingesMultipleElement) {
 					$this->strings = array_merge($this->strings, $field->render());
 				} else {
 					$this->strings['element_'. $field->name] = $field->render();
