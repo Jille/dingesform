@@ -6,8 +6,8 @@
 
 		protected $element = 'textarea';
 		
-		function parseInput($value) {
-			if(($error = parent::parseInput($value)) !== true) {
+		function validate($value) {
+			if(($error = parent::validate($value)) !== true) {
 				return $error;
 			}
 			if($this->maxLength && strlen($value) > $this->maxLength) {
