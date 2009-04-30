@@ -16,7 +16,7 @@
 		function generateHTML() {
 			$value = $this->getEffectiveValue();
 			$strings = array();
-			foreach($this->options as $i=>$option) {
+			foreach($this->options as $option) {
 				$attributes = $this->attributes;
 				$attributes['id'] = $this->f->fieldIdPrefix . $this->id .'_'. $option['value'];
 				$attributes['value'] = $option['value'];
