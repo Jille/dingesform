@@ -23,10 +23,7 @@
 			return $field;
 		}
 
-		function addField($field) {
-			if(!is_object($field) || !$field instanceof DingesField) {
-				throw new DingesException('Invalid field given to addField()');
-			}
+		function addField(DingesField $field) {
 			if(isset($this->fields[$field->name])) {
 				throw new DingesException('There is already a field with the name: '. $field->name);
 			}
