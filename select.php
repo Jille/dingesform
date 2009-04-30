@@ -3,6 +3,9 @@
 		protected $element = 'select';
 		protected $options = array();
 
+		// IE (iig 6) selecteert het eerste element als je op het label klikt
+		protected $realLabelTag = false;
+
 		function addItem($value, $content, $optgroup = NULL) {
 			$option = array('value' => $value, 'content' => htmlspecialchars($content, ENT_NOQUOTES, NULL, false));
 			if($optgroup) {
@@ -48,16 +51,6 @@
 				$options .= DingesForm::generateTag('option', $attributes, $option['content']);
 			}
 			return DingesForm::generateTag($this->element, $this->attributes, $options);
-		}
-
-		// IE (iig 6) selecteert het eerste element als je op het label klikt
-		function getLabelTag() {
-			$attributes = array();
-			$attributes['id'] = $this->f->fieldIdPrefix .'label_'. $this->id;
-			if($this->isValid() === false) {
-				$attributes['class'] = 'dingesErrorLabel';
-			}
-			return DingesForm::generateTag('span', $attributes, $this->label);
 		}
 	}
 ?>

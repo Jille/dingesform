@@ -12,6 +12,7 @@
 	require('password.php');
 	require('radiobutton.php');
 	require('static.php');
+	require('checklist.php');
 
 	$f = new DingesForm();
 	$f->setFieldIdPrefix('blaat_');
@@ -51,6 +52,14 @@
 	$favbier = new DingesStatic('favbier', 'Favoriete bier');
 	$favbier->setDefaultValue('Hertog Jan');
 	$f->addField($favbier);
+
+	$klikjerot = $f->createInputField('checklist', 'klikjerot', false, 'Klik je rot');
+	$klikjerot->addItem('a', 'A');
+	$klikjerot->addItem('b', 'B');
+	$klikjerot->addItem('c', 'C');
+	$klikjerot->addItem('d', 'D');
+	$klikjerot->addItem('e', 'E');
+	$klikjerot->addItem('f', 'F');
 
 	$subm = new DingesSubmit('subm', 'Opst"uren');
 	$f->addField($subm);

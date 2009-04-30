@@ -16,6 +16,8 @@
 
 		protected $keepValue = true;
 
+		protected $realLabelTag = true;
+
 		function __construct($name, $label) {
 			$this->name = $name;
 			$this->label = $label;
@@ -87,12 +89,17 @@
 
 		function getLabelTag() {
 			$attributes = array();
-			$attributes['for'] = $this->f->fieldIdPrefix . $this->id;
+			if($this->realLabelTag) {
+				$element = 'label';
+				$attributes['for'] = $this->f->fieldIdPrefix . $this->id;
+			} else {
+				$element = 'span';
+			}
 			$attributes['id'] = $this->f->fieldIdPrefix .'label_'. $this->id;
 			if($this->isValid() === false) {
 				$attributes['class'] = 'dingesErrorLabel';
 			}
-			return DingesForm::generateTag('label', $attributes, $this->label);
+			return DingesForm::generateTag($element, $attributes, $this->label);
 		}
 
 		function _setValid($bool) {
