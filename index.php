@@ -40,6 +40,7 @@
 	$bier->addItem('leffe', 'Leffe');
 	$bier->addItem('latrappe', 'La Trappe');
 	$bier->setAttribute('size', 4);
+	$bier->setAttribute('multiple', 'multiple');
 
 	$pass = $f->createInputField('password', 'pass', false, 'Wachtwoord');
 

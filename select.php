@@ -12,6 +12,13 @@
 			}
 		}
 
+		function fillAttributes() {
+			parent::fillAttributes();
+			if(isset($this->attributes['multiple'])) {
+				$this->setAttribute('name', $this->name .'[]');
+			}
+		}
+
 		function generateHTML() {
 			$value = $this->getEffectiveValue();
 			$options = '';
@@ -29,8 +36,14 @@
 					continue;
 				}
 				$attributes = array('value' => $option['value']);
-				if($option['value'] == $value) {
-					$attributes['selected'] = 'selected';
+				if(is_array($value)) {
+					if(in_array($option['value'], $value)) {
+						$attributes['selected'] = 'selected';
+					}
+				} else {
+					if($option['value'] == $value) {
+						$attributes['selected'] = 'selected';
+					}
 				}
 				$options .= DingesForm::generateTag('option', $attributes, $option['content']);
 			}
