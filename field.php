@@ -30,7 +30,7 @@
 		}
 
 		function fillAttributes() {
-			$this->setAttribute('id', $this->f->fieldIdPrefix . $this->id);
+			$this->setAttribute('id', $this->f->getFieldIdPrefix() . $this->id);
 			$this->setAttribute('name', $this->name);
 			if($this->isValid() === false) {
 				$this->setAttribute('class', 'dingesError');

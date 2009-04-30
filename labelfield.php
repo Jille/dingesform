@@ -12,11 +12,11 @@
 			$attributes = array();
 			if($this->realLabelTag) {
 				$element = 'label';
-				$attributes['for'] = $this->f->fieldIdPrefix . $this->id;
+				$attributes['for'] = $this->f->getFieldIdPrefix() . $this->id;
 			} else {
 				$element = 'span';
 			}
-			$attributes['id'] = $this->f->fieldIdPrefix .'label_'. $this->id;
+			$attributes['id'] = $this->f->getFieldIdPrefix() .'label_'. $this->id;
 			if($this->isValid() === false) {
 				$attributes['class'] = 'dingesErrorLabel';
 			}

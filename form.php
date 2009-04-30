@@ -114,11 +114,6 @@
 			return $out;
 		}
 
-		function __get($key) {
-			$func = 'get'. $key;
-			return $this->$func();
-		}
-
 		/* Simple getters and setters */
 		function getFieldIdPrefix() {
 			return $this->fieldIdPrefix;
