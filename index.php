@@ -44,7 +44,7 @@
 
 	$pass = $f->createInputField('password', 'pass', false, 'Wachtwoord');
 
-	$jaofnee = $f->createInputField('radiobutton', 'jaofnee', true, 'Ja of Nee');
+	$jaofnee = $f->createInputField('radiobutton', 'jaofnee', false, 'Ja of Nee');
 	$jaofnee->addItem('ja', 'Ja');
 	$jaofnee->addItem('nee', 'Nee');
 

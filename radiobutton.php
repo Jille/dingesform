@@ -11,7 +11,7 @@
 			if($valid !== true) {
 				return $valid;
 			}
-			if($value && !isset($this->options[$value])) {
+			if($value !== NULL && !isset($this->options[$value])) {
 				return 'ERR_UNKNOWN_OPTION';
 			}
 			return true;
@@ -20,11 +20,10 @@
 		function render() {
 			$this->fillAttributes();
 			$strings = array();
-			foreach($this->options as &$option) {
+			foreach($this->options as $option) {
 				$strings['radiobutton_'. $this->name .'_'. $option['value']] = $this->generateHTML($option);
 				$strings['label_radiobutton_'. $this->name .'_'. $option['value']] = $this->getRadioLabelTag($option);
 			}
-			unset($option);
 			return $strings;
 		}
 
@@ -51,7 +50,7 @@
 		function getRadioLabelTag($option) {
 			$attributes = array();
 			$attributes['for'] = $option['id'];
-			$attributes['id'] = 'label_'. $option['id'];
+			$attributes['id'] = $this->f->fieldIdPrefix .'label_'. $this->id .'_'. $option['value'];
 			return DingesForm::generateTag('label', $attributes, $option['content']);
 		}
 
