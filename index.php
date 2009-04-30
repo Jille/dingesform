@@ -12,6 +12,7 @@
 	require('password.php');
 	require('radiobutton.php');
 	require('static.php');
+	require('checklist.php');
 
 	$f = new DingesForm();
 	$f->setFieldIdPrefix('blaat_');
@@ -51,6 +52,11 @@
 	$favbier = new DingesStatic('favbier', 'Favoriete bier');
 	$favbier->setDefaultValue('Hertog Jan');
 	$f->addField($favbier);
+
+	$klikjerot = $f->createInputField('checklist', 'klikjerot', false, 'Klik je rot');
+	foreach(range('a', 'f') as $i) {
+		$klikjerot->addItem($i, strtoupper($i));
+	}
 
 	$subm = new DingesSubmit('subm', 'Opst"uren');
 	$f->addField($subm);
@@ -123,6 +129,16 @@
 				<td><?= $strings['label_favbier'] ?></td>
 				<td><?= $strings['element_favbier'] ?></td>
 			</tr>
+			<tr>
+				<td><?= $strings['label_klikjerot'] ?></td>
+				<td><?= $strings['element_klikjerot_a'] ?> <?= $strings['label_klikjerot_a'] ?></td>
+			</tr>
+<?php foreach(range('b', 'f') as $i) { ?>
+			<tr>
+				<td></td>
+				<td><?= $strings['element_klikjerot_'. $i] ?> <?= $strings['label_klikjerot_'. $i] ?></td>
+			</tr>
+<?php } ?>
 			<tr>
 				<td></td>
 				<td><?= $strings['element_subm'] ?></td>
