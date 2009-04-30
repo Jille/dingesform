@@ -78,14 +78,6 @@
 			$this->value = $value;
 		}
 
-		function __get($key) {
-			$func = 'get'. $key;
-			if(!method_exists($this, $func)) {
-				throw new DingesException('Attempt to access property which has no getter ('. get_class($this) .'->'. $key .')');
-			}
-			return $this->$func();
-		}
-
 		function _setValid($bool) {
 			$this->valid = $bool;
 		}

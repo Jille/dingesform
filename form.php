@@ -24,22 +24,22 @@
 		}
 
 		function addField(DingesField $field) {
-			if(isset($this->fields[$field->name])) {
-				throw new DingesException('There is already a field with the name: '. $field->name);
+			if(isset($this->fields[$field->getName()])) {
+				throw new DingesException('There is already a field with the name: '. $field->getName());
 			}
-			$this->fields[$field->name] = $field;
+			$this->fields[$field->getName()] = $field;
 			$field->_setForm($this);
 
 			if($this->isSubmitted) {
-				if(isset($_POST[$field->name])) {
-					$field->_setValue($_POST[$field->name]);
+				if(isset($_POST[$field->getName()])) {
+					$field->_setValue($_POST[$field->getName()]);
 				}
 			}
 		}
 
 		function validate() {
 			foreach($this->fields as $field) {
-				if(($error = $field->validate($field->value)) !== true) {
+				if(($error = $field->validate($field->getValue())) !== true) {
 					$field->_setValid(false);
 					$this->validationErrors[] = array('field' => $field, 'message' => $error);
 				} else {
@@ -86,13 +86,13 @@
 
 			foreach($this->fields as $field) {
 				if($field instanceof DingesLabelField) {
-					$this->strings['label_'. $field->name] = $field->getLabelTag();
+					$this->strings['label_'. $field->getName()] = $field->getLabelTag();
 				}
 				if($field instanceof DingesMultipleElement) {
 					$this->strings = array_merge($this->strings, $field->render());
 				} else {
-					$this->strings['element_'. $field->name] = $field->render();
-					$this->strings['id_'. $field->name] = $this->fieldIdPrefix . $field->id;
+					$this->strings['element_'. $field->getName()] = $field->render();
+					$this->strings['id_'. $field->getName()] = $this->fieldIdPrefix . $field->getId();
 				}
 			}
 		}
