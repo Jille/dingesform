@@ -14,6 +14,7 @@
 	require('radiobutton.php');
 	require('static.php');
 	require('checklist.php');
+	require('multiplesubmit.php');
 
 	$f = new DingesForm();
 	$f->setFieldIdPrefix('blaat_');
@@ -62,6 +63,11 @@
 	$subm = new DingesSubmit('subm', 'Opst"uren');
 	$f->addField($subm);
 
+	$what = new DingesMultipleSubmit('what');
+	$what->addItem('bier', 'Ik wil bier');
+	$what->addItem('wodka', 'Ik wil wodka');
+	$f->addField($what);
+
 	$f->render();
 
 	$strings = $f->getStrings();
@@ -69,12 +75,6 @@
 <html>
 	<head>
 		<title>DingesForm - test</title>
-		<script type="text/javascript" src="js/forms.js"></script>
-		<script type="text/javascript">
-			function page_init() {
-				df = new DingesForm(document.forms[0]);
-			}
-		</script>
 		<style type="text/css">
 			.dingesError {
 				border: 1px dotted red;
@@ -84,7 +84,7 @@
 			}
 		</style>
 	</head>
-	<body onload="page_init();">
+	<body>
 <?php if($f->isSubmitted() && !$f->isValid()) { ?>
 		<ul style="color: red">
 <?php foreach($f->getValidationErrors() as $error) { ?>
@@ -93,6 +93,9 @@
 		</ul>
 <?php } elseif($f->isSubmitted()) { ?>
 		<div style="color: green">OK!</div>
+<?php
+	var_dump($what->getValue());
+?>
 <?php } ?>
 		<?= $strings['form_open'] ?>
 		<table>
@@ -149,6 +152,10 @@
 			<tr>
 				<td></td>
 				<td><?= $strings['element_subm'] ?></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><?= $strings['element_what_bier'] ?> <?= $strings['element_what_wodka'] ?></td>
 			</tr>
 		</table>
 		<?= $strings['form_close'] ?>
