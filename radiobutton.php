@@ -1,6 +1,7 @@
 <?php
 	class DingesRadioButton extends DingesInputField implements DingesMultipleElement {
 		protected $options = array();
+		protected $realLabelTag = false;
 
 		function addItem($value, $content, $escape_html = true) {
 			$this->options[$value] = array('value' => $value, 'content' => htmlspecialchars($content, ENT_NOQUOTES, NULL, false), 'id' => $this->f->fieldIdPrefix .'id_radiobutton_'. $this->name .'_'. $value);
@@ -53,15 +54,5 @@
 			$attributes['id'] = $this->f->fieldIdPrefix .'label_'. $this->id .'_'. $option['value'];
 			return DingesForm::generateTag('label', $attributes, $option['content']);
 		}
-
-		function getLabelTag() {
-			$attributes = array();
-			$attributes['id'] = $this->f->fieldIdPrefix .'label_'. $this->id;
-			if($this->isValid() === false) {
-				$attributes['class'] = 'dingesErrorLabel';
-			}
-			return DingesForm::generateTag('span', $attributes, $this->label);
-		}
-
 	}
 ?>
