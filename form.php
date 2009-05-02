@@ -9,6 +9,8 @@
 
 		protected $validationErrors;
 
+		protected $autoFocus = false;
+
 		function __construct() {
 			$this->isSubmitted = (count($_POST) > 0);
 		}
@@ -84,7 +86,18 @@
 			$this->strings['form_open'] = '<form method="POST" action=".">';
 			$this->strings['form_close'] = '</form>';
 
+			$focusFirst = $this->autoFocus;
+
+			if($focusFirst && $this->isSubmitted() && !$this->isValid()) {
+				$this->validationErrors[0]['field']->setAttribute("focus", "true");
+				$focusFirst = false;
+			}
+
 			foreach($this->fields as $field) {
+				if($focusFirst) {
+					$field->setAttribute("focus", "true");
+					$focusFirst = false;
+				}
 				if($field instanceof DingesLabelField) {
 					$this->strings['label_'. $field->getName()] = $field->getLabelTag();
 				}
@@ -121,6 +134,14 @@
 
 		function setFieldIdPrefix($value) {
 			$this->fieldIdPrefix = $value;
+		}
+
+		function getAutoFocus() {
+			return $this->autoFocus;
+		}
+
+		function setAutoFocus($value) {
+			$this->autoFocus = $value;
 		}
 	}
 
