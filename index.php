@@ -94,7 +94,7 @@
 <?php } elseif($f->isSubmitted()) { ?>
 		<div style="color: green">OK!</div>
 <?php
-	var_dump($what->getValue());
+	var_dump($bla->getValue());
 ?>
 <?php } ?>
 		<?= $strings['form_open'] ?>

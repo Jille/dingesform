@@ -4,8 +4,8 @@
 			parent::__construct($name, $required, $label);
 		}
 
-		function parseInput($value) {
-			return !is_null($value);
+		function getValue() {
+			return !is_null($this->value);
 		}
 
 		function fillAttributes() {

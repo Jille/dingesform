@@ -21,10 +21,6 @@
 			$this->id = $name;
 		}
 
-		function parseInput($value) {
-			return $value;
-		}
-
 		function validate($value) {
 			return true;
 		}
