@@ -18,3 +18,12 @@ DingesForm.prototype.validate = function() {
 		}
 	}
 }
+
+DingesFormField = funtion(fieldEl) {
+}
+
+DingesFormField.prototype = {
+};
+
+DingesFormField.prototype.validate = function() {
+}
