@@ -18,7 +18,7 @@
 			$strings = array();
 			foreach($this->options as $option) {
 				$attributes = $this->attributes;
-				$attributes['id'] = $this->f->getFieldIdPrefix() . $this->id .'_'. $option['value'];
+				$attributes['id'] = $this->form->getFieldIdPrefix() . $this->id .'_'. $option['value'];
 				$attributes['value'] = $option['value'];
 				if($value && in_array($option['value'], $value)) {
 					$attributes['checked'] = 'checked';
@@ -31,8 +31,8 @@
 
 		function getCheckBoxLabelTag($option) {
 			$attributes = array();
-			$attributes['id'] = $this->f->getFieldIdPrefix() .'label_'. $this->id .'_'. $option['value'];
-			$attributes['for'] = $this->f->getFieldIdPrefix() . $this->id .'_'. $option['value'];
+			$attributes['id'] = $this->form->getFieldIdPrefix() .'label_'. $this->id .'_'. $option['value'];
+			$attributes['for'] = $this->form->getFieldIdPrefix() . $this->id .'_'. $option['value'];
 			if($this->isValid() === false) {
 				$attributes['class'] = 'dingesErrorLabel';
 			}

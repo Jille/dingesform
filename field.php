@@ -1,6 +1,6 @@
 <?php
 	abstract class DingesField {
-		protected $f;
+		protected $form;
 
 		protected $name;
 		protected $id;
@@ -40,7 +40,7 @@
 		}
 
 		function fillAttributes() {
-			$this->setAttribute('id', $this->f->getFieldIdPrefix() . $this->id);
+			$this->setAttribute('id', $this->form->getFieldIdPrefix() . $this->id);
 			$this->setAttribute('name', $this->name);
 			if($this->isValid() === false) {
 				$this->setAttribute('class', 'dingesError');
@@ -73,15 +73,15 @@
 		}
 
 		function getEffectiveValue() {
-			if($this->f->isSubmitted() && $this->keepValue) {
+			if($this->form->isSubmitted() && $this->keepValue) {
 				return $this->value;
 			} else {
 				return $this->defaultValue;
 			}
 		}
 
-		function _setForm($f) {
-			$this->f = $f;
+		function _setForm($form) {
+			$this->form = $form;
 		}
 
 		function _setValue($value) {
