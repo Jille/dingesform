@@ -15,6 +15,9 @@
 
 		protected $keepValue = true;
 
+		protected $validationCallbacks = array();
+		protected $validationRegexes = array();
+
 		function __construct($name) {
 			$this->name = $name;
 
@@ -22,6 +25,17 @@
 		}
 
 		function validate($value) {
+			foreach($this->validationRegexes as $regex) {
+				if(!preg_match($regex[0], $value)) {
+					return $regex[1];
+				}
+			}
+			foreach($this->validationCallbacks as $callback) {
+				$error = call_user_func_array($callback, array($value, $this));
+				if($error !== true) {
+					return $error;
+				}
+			}
 			return true;
 		}
 
@@ -80,6 +94,25 @@
 
 		function isValid() {
 			return $this->valid;
+		}
+
+		function addValidationRegex($regex, $errorCode = 'ERR_INVALID') {
+			$this->validationRegexes[] = array($regex, $errorCode);
+		}
+
+		function clearValidationRegexes() {
+			$this->validationRegexes = array();
+		}
+
+		function addValidationCallback($callback) {
+			if(!is_callable($callback)) {
+				throw new DingesException("Invalid callback given to addValidationCallback");
+			}
+			$this->validationCallbacks[] = $callback;
+		}
+
+		function clearValidationCallbacks() {
+			$this->validationCallbacks = array();
 		}
 
 		/* Simple getters and setters */

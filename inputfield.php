@@ -8,6 +8,9 @@
 		}
 
 		function validate($value) {
+			if(($error = parent::validate($value)) !== true) {
+				return $error;
+			}
 			if($this->required && !$value) {
 				return 'ERR_EMPTY';
 			}

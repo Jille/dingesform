@@ -21,6 +21,7 @@
 
 	$name = $f->createInputField('text', 'name', true, 'Naam');
 	$name->setDefaultValue('Henk"ie"');
+	$name->addValidationRegex('/^\S+$/');
 
 	$bla = $f->createInputField('checkbox', 'bla', false, 'Bla');
 	$bla->setDefaultValue(true);
@@ -46,6 +47,15 @@
 	$bier->setAttribute('multiple', 'multiple');
 
 	$pass = $f->createInputField('password', 'pass', false, 'Wachtwoord');
+
+	function notEqualsName($value) {
+		global $name;
+		if($name->getValue() == $value) {
+			return 'ERR_UNSAFE';
+		}
+		return true;
+	}
+	$pass->addValidationCallback('notEqualsName');
 
 	$jaofnee = $f->createInputField('radiobutton', 'jaofnee', false, 'Ja of Nee');
 	$jaofnee->addItem('ja', 'Ja');
