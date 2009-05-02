@@ -15,6 +15,7 @@
 	require('static.php');
 	require('checklist.php');
 	require('multiplesubmit.php');
+	require('hidden.php');
 
 	$f = new DingesForm();
 	$f->setFieldIdPrefix('blaat_');
@@ -77,6 +78,10 @@
 	$what->addItem('bier', 'Ik wil bier');
 	$what->addItem('wodka', 'Ik wil wodka');
 	$f->addField($what);
+
+	$hide = new DingesHidden('hide');
+	$hide->setDefaultValue('and seek');
+	$f->addField($hide);
 
 	$f->render();
 
@@ -160,7 +165,7 @@
 			</tr>
 <?php } ?>
 			<tr>
-				<td></td>
+				<td><?= $strings['element_hide'] ?></td>
 				<td><?= $strings['element_subm'] ?></td>
 			</tr>
 			<tr>
