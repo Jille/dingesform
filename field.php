@@ -20,14 +20,13 @@
 
 		function __construct($name) {
 			$this->name = $name;
-
 			$this->id = $name;
 		}
 
 		function validate($value) {
 			foreach($this->validationRegexes as $regex) {
-				if(!preg_match($regex[0], $value)) {
-					return $regex[1];
+				if(!preg_match($regex['regex'], $value)) {
+					return $regex['errorCode'];
 				}
 			}
 			foreach($this->validationCallbacks as $callback) {
@@ -97,7 +96,7 @@
 		}
 
 		function addValidationRegex($regex, $errorCode = 'ERR_INVALID') {
-			$this->validationRegexes[] = array($regex, $errorCode);
+			$this->validationRegexes[] = array('regex' => $regex, 'errorCode' => $errorCode);
 		}
 
 		function clearValidationRegexes() {
