@@ -63,6 +63,15 @@
 	$jaofnee->addItem('ja', 'Ja');
 	$jaofnee->addItem('nee', 'Nee');
 
+	$watdanwel = $f->createInputField('text', 'watdanwel', false, 'Wat dan wel?');
+
+	$f->addPreValidationHook('watdanwel_bla');
+	$jaofnee->setAttribute('onClick', 'watdanwel_bla();');
+
+	function watdanwel_bla($f) {
+		$f->getField('watdanwel')->setRequired($f->getField('jaofnee')->getValue() == 'nee');
+	}
+
 	$favbier = new DingesStatic('favbier', 'Favoriete bier');
 	$favbier->setDefaultValue('Hertog Jan');
 	$f->addField($favbier);
@@ -99,8 +108,14 @@
 				color: red;
 			}
 		</style>
+		<script type="text/javascript">
+			function watdanwel_bla() {
+				document.getElementById('watdanwel_tr').style.display = document.getElementById('blaat_id_radiobutton_jaofnee_nee').checked ? '' : 'none';
+				// XXX setRequired('watdanwel');
+			}
+		</script>
 	</head>
-	<body>
+	<body onLoad="watdanwel_bla();">
 <?php if($f->isSubmitted()) { ?>
 		<div style="color: green">OK!</div>
 <?php
@@ -150,6 +165,10 @@
 			<tr>
 				<td></td>
 				<td><?= $strings['radiobutton_jaofnee_nee'] .' '. $strings['label_radiobutton_jaofnee_nee'] ?></td>
+			</tr>
+			<tr id="watdanwel_tr">
+				<td><?= $strings['label_watdanwel'] ?></td>
+				<td><?= $strings['element_watdanwel'] ?></td>
 			</tr>
 			<tr>
 				<td><?= $strings['label_favbier'] ?></td>
