@@ -114,6 +114,17 @@
 			return $this->strings;
 		}
 
+		function getFields() {
+			return $this->fields;
+		}
+
+		function getField($name) {
+			if(!isset($this->fields[$name])) {
+				throw new DingesException('There is no a field with the name: '. $name);
+			}
+			return $this->fields[$name];
+		}
+
 		static function generateTag($element, $attributes = array(), $content = NULL) {
 			$out = '<'. $element;
 			foreach($attributes as $name => $value) {
