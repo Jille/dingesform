@@ -73,7 +73,7 @@
 		}
 
 		function getEffectiveValue() {
-			if($this->form->isSubmitted() && $this->keepValue) {
+			if($this->form->isPosted() && $this->keepValue) {
 				return $this->value;
 			} else {
 				return $this->defaultValue;

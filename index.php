@@ -100,17 +100,17 @@
 		</style>
 	</head>
 	<body>
-<?php if($f->isSubmitted() && !$f->isValid()) { ?>
+<?php if($f->isSubmitted()) { ?>
+		<div style="color: green">OK!</div>
+<?php
+	var_dump($bla->getValue());
+?>
+<?php } elseif($f->isPosted()) { ?>
 		<ul style="color: red">
 <?php foreach($f->getValidationErrors() as $error) { ?>
 			<li><?= $error ?></li>
 <?php } ?>
 		</ul>
-<?php } elseif($f->isSubmitted()) { ?>
-		<div style="color: green">OK!</div>
-<?php
-	var_dump($bla->getValue());
-?>
 <?php } ?>
 		<?= $strings['form_open'] ?>
 		<table>

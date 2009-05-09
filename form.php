@@ -5,14 +5,15 @@
 
 		protected $fieldIdPrefix = '';
 
-		protected $isSubmitted;
+		protected $posted;
 
 		protected $validationErrors;
+		protected $validated = false;
 
 		protected $autoFocus = false;
 
 		function __construct() {
-			$this->isSubmitted = (count($_POST) > 0);
+			$this->posted = (count($_POST) > 0);
 		}
 
 		function createInputField($type, $name, $required, $label) {
@@ -32,14 +33,16 @@
 			$this->fields[$field->getName()] = $field;
 			$field->_setForm($this);
 
-			if($this->isSubmitted) {
+			if($this->posted) {
 				if(isset($_POST[$field->getName()])) {
 					$field->_setValue($_POST[$field->getName()]);
 				}
 			}
 		}
 
-		function validate() {
+		private function validate() {
+			assert('$this->posted');
+			assert('!$this->validated');
 			foreach($this->fields as $field) {
 				if(($error = $field->validate($field->getValue())) !== true) {
 					$field->_setValid(false);
@@ -48,14 +51,22 @@
 					$field->_setValid(true);
 				}
 			}
+			$this->validated = true;
 		}
 
 		function isSubmitted() {
-			return $this->isSubmitted;
+			if($this->posted) {
+				return $this->isValid();
+			}
+			return false;
+		}
+
+		function isPosted() {
+			return $this->posted;
 		}
 
 		function isValid() {
-			if(!is_array($this->validationErrors)) {
+			if(!$this->validated) {
 				$this->validate();
 			}
 			return (count($this->validationErrors) == 0);
@@ -69,8 +80,8 @@
 		}
 
 		function getValidationErrors() {
-			if($this->validationErrors === NULL) {
-				return false;
+			if(!$this->validated) {
+				$this->validate();
 			}
 			$errors = array();
 			foreach($this->validationErrors as $error) {
@@ -80,7 +91,7 @@
 		}
 
 		function render() {
-			if($this->isSubmitted() && !is_array($this->validationErrors)) {
+			if($this->posted && !$this->validated) {
 				$this->validate();
 			}
 			$this->strings['form_open'] = '<form method="POST" action=".">';
@@ -88,7 +99,7 @@
 
 			$focusFirst = $this->autoFocus;
 
-			if($focusFirst && $this->isSubmitted() && !$this->isValid()) {
+			if($focusFirst && $this->posted && count($this->validationErrors) > 0) {
 				$this->validationErrors[0]['field']->setAttribute("focus", "true");
 				$focusFirst = false;
 			}
