@@ -12,6 +12,9 @@
 
 		protected $autoFocus = false;
 
+		protected $preValidationHooks = array();
+		protected $validationCallbacks = array();
+
 		function __construct() {
 			$this->posted = (count($_POST) > 0);
 		}
@@ -43,12 +46,23 @@
 		private function validate() {
 			assert('$this->posted');
 			assert('!$this->validated');
+
+			foreach($this->preValidationHooks as $callback) {
+				call_user_func_array($callback, array($this));
+			}
+
 			foreach($this->fields as $field) {
 				if(($error = $field->validate($field->getValue())) !== true) {
 					$field->_setValid(false);
 					$this->validationErrors[] = array('field' => $field, 'message' => $error);
 				} else {
 					$field->_setValid(true);
+				}
+			}
+
+			foreach($this->validationCallbacks as $callback) {
+				if(($error = call_user_func_array($callback, array($this))) !== true) {
+					$this->validationErrors[] = array('message' => $error);
 				}
 			}
 			$this->validated = true;
@@ -134,6 +148,28 @@
 				throw new DingesException('There is no a field with the name: '. $name);
 			}
 			return $this->fields[$name];
+		}
+
+		function addValidationCallback($callback) {
+			if(!is_callable($callback)) {
+				throw new DingesException("Invalid callback given to addValidationCallback");
+			}
+			$this->validationCallbacks[] = $callback;
+		}
+
+		function clearValidationCallbacks() {
+			$this->validationCallbacks = array();
+		}
+
+		function addPreValidationHook($callback) {
+			if(!is_callable($callback)) {
+				throw new DingesException("Invalid callback given to preValidationHook");
+			}
+			$this->preValidationHooks[] = $callback;
+		}
+
+		function clearPreValidationHooks() {
+			$this->preValidationHooks = array();
 		}
 
 		static function generateTag($element, $attributes = array(), $content = NULL) {
