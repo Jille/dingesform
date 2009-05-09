@@ -1,6 +1,7 @@
 <?php
 	error_reporting(E_ALL);
 	require('form.php');
+	require('magic.php');
 	require('field.php');
 	require('labelfield.php');
 	require('inputfield.php');
