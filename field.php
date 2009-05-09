@@ -30,8 +30,7 @@
 				}
 			}
 			foreach($this->validationCallbacks as $callback) {
-				$error = call_user_func_array($callback, array($value, $this));
-				if($error !== true) {
+				if(($error = call_user_func_array($callback, array($value, $this))) !== true) {
 					return $error;
 				}
 			}
