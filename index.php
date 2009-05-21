@@ -17,6 +17,7 @@
 	require('checklist.php');
 	require('multiplesubmit.php');
 	require('hidden.php');
+	require('submitimage.php');
 
 	$f = new DingesForm();
 	$f->setFieldIdPrefix('blaat_');
@@ -83,6 +84,9 @@
 
 	$subm = new DingesSubmit('subm', 'Opst"uren');
 	$f->addField($subm);
+
+	$subimg = new DingesSubmitImage('subimg', 'opslaan.png');
+	$f->addField($subimg);
 
 	$what = new DingesMultipleSubmit('what');
 	$what->addItem('bier', 'Ik wil bier');
@@ -185,14 +189,19 @@
 			</tr>
 <?php } ?>
 			<tr>
-				<td><?= $strings['element_hide'] ?></td>
+				<td></td>
 				<td><?= $strings['element_subm'] ?></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><?= $strings['element_subimg'] ?></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td><?= $strings['element_what_bier'] ?> <?= $strings['element_what_wodka'] ?></td>
 			</tr>
 		</table>
+		<?= $strings['element_hide'] ?>
 		<?= $strings['form_close'] ?>
 		Strings:
 		<ul>
