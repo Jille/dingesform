@@ -1,5 +1,5 @@
 <?php
-	class DingesCheckList extends DingesInputField implements DingesMultipleElement {
+	class DingesCheckList extends DingesInputField {
 		protected $options = array();
 
 		function addItem($value, $content) {
@@ -13,7 +13,8 @@
 			$this->setAttribute('type', 'checkbox');
 		}
 
-		function generateHTML() {
+		function render() {
+			$this->fillAttributes();
 			$value = $this->getEffectiveValue();
 			$strings = array();
 			foreach($this->options as $option) {

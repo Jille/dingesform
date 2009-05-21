@@ -1,5 +1,5 @@
 <?php
-	class DingesMultipleSubmit extends DingesField implements DingesMultipleElement {
+	class DingesMultipleSubmit extends DingesField {
 		protected $options = array();
 
 		function addItem($key, $value) {
@@ -15,7 +15,8 @@
 			$this->setAttribute('type', 'submit');
 		}
 
-		function generateHTML() {
+		function render() {
+			$this->fillAttributes();
 			$strings = array();
 			foreach($this->options as $key=>$value) {
 				$attributes = $this->attributes;

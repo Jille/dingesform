@@ -1,11 +1,9 @@
 <?php
 	class DingesStatic extends DingesLabelField {
-		function render() {
-			return DingesForm::generateTag('span', array('id' => $this->form->getFieldIdPrefix() . $this->id), $this->getDefaultValue());
-		}
+		protected $realLabelTag = false;
 
-		function getLabelTag() {
-			return DingesForm::generateTag('span', array('id' => $this->form->getFieldIdPrefix() .'label_'. $this->id), $this->label);
+		function generateHTML() {
+			return DingesForm::generateTag('span', array('id' => $this->form->getFieldIdPrefix() . $this->id), $this->getDefaultValue());
 		}
 	}
 ?>

@@ -1,5 +1,5 @@
 <?php
-	class DingesRadioButton extends DingesInputField implements DingesMultipleElement {
+	class DingesRadioButton extends DingesInputField {
 		protected $options = array();
 		protected $realLabelTag = false;
 

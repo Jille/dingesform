@@ -126,12 +126,7 @@
 				if($field instanceof DingesLabelField) {
 					$this->strings['label_'. $field->getName()] = $field->getLabelTag();
 				}
-				if($field instanceof DingesMultipleElement) {
-					$this->strings = array_merge($this->strings, $field->render());
-				} else {
-					$this->strings['element_'. $field->getName()] = $field->render();
-					$this->strings['id_'. $field->getName()] = $this->fieldIdPrefix . $field->getId();
-				}
+				$this->strings = array_merge($this->strings, $field->render());
 			}
 		}
 

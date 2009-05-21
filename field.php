@@ -51,7 +51,11 @@
 
 		function render() {
 			$this->fillAttributes();
-			return $this->generateHTML();
+			$strings = array(
+				'element_'. $this->name => $this->generateHTML(),
+				'id_'. $this->name => $this->form->getFieldIdPrefix() . $this->id,
+			);
+			return $strings;
 		}
 
 		function setAttribute($name, $value, $append = false) {
@@ -145,8 +149,5 @@
 		function setKeepValue($value) {
 			$this->keepValue = $value;
 		}
-	}
-
-	interface DingesMultipleElement {
 	}
 ?>
