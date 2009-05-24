@@ -1,7 +1,7 @@
 <?php
 	class DingesForm {
 		protected $fields = array();
-		// moet protected worden!
+		// XXX moet protected worden!
 		public $strings = array();
 
 		protected $fieldIdPrefix = '';
@@ -20,7 +20,7 @@
 
 		function __construct() {
 			$this->posted = (count($_POST) > 0);
-			$this->setAttribute('id', 'dingesForm');
+			$this->setAttribute('id', 'dingesForm'); // XXX niet multiform compatible
 			$this->setAttribute('method', 'POST');
 			$this->setAttribute('action', '.');
 		}
