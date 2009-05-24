@@ -45,16 +45,32 @@
 		}
 
 		function generateHTML() {
-			return DingesForm::generateTag($this->element, $this->attributes);
+			$tag = DingesForm::generateTag($this->element, $this->attributes);
+			$comment = '<!-- ';
+			if(isset($this->restrictions)) {
+				foreach($this->restrictions as $k => $v) {
+					$comment .= $k .'='. $v .' ';
+				}
+			}
+			$comment .= '-->';
+			return $tag . $comment;
 		}
 
 		function render() {
 			$this->fillAttributes();
+			$this->fillFormInitCode();
+			if(isset($this->restrictions)) {
+				$this->fillRestrictions();
+			}
 			$strings = array(
 				'element_'. $this->name => $this->generateHTML(),
 				'id_'. $this->name => $this->form->getFieldIdPrefix() . $this->id,
 			);
 			return $strings;
+		}
+
+		function fillFormInitCode() {
+			$this->form->strings['form_init_code'] .= "\ndf.fields['". $this->getAttribute('id') ."'] = new DingesFormField(document.getElementById('". $this->getAttribute('id') ."'));";
 		}
 
 		function setAttribute($name, $value, $append = false) {
@@ -71,6 +87,30 @@
 
 		function getAttribute($name) {
 			return $this->attributes[$name];
+		}
+
+		function setRestriction($name, $value, $append = false) {
+			if($append && isset($this->restrictions[$name])) {
+				$this->restrictions[$name] .= $value;
+			} else {
+				$this->restrictions[$name] = $value;
+			}
+		}
+
+		function deleteRestriction($name) {
+			unset($this->restrictions[$name]);
+		}
+
+		function getRestriction($name) {
+			return $this->restrictions[$name];
+		}
+
+		function getEffectiveValue() {
+			if($this->form->isPosted() && $this->keepValue) {
+				return $this->value;
+			} else {
+				return $this->defaultValue;
+			}
 		}
 
 		function _setForm($form) {

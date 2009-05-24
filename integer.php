@@ -19,6 +19,16 @@
 			return true;
 		}
 
+		function fillRestrictions() {
+			parent::fillRestrictions();
+			if($this->min !== NULL) {
+				$this->setRestriction('min', $this->min);
+			}
+			if($this->max !== NULL) {
+				$this->setRestriction('max', $this->max);
+			}
+		}
+
 		/* Simple getters and setters */
 		function getMin() {
 			return $this->min;

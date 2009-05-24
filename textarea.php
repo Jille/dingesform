@@ -22,6 +22,13 @@
 			$this->setAttribute('rows', $this->rows);
 		}
 
+		function fillRestrictions() {
+			parent::fillRestrictions();
+			if(isset($this->maxLength) && $this->maxLength > 0) {
+				$this->setRestriction('maxLength', $this->maxLength);
+			}
+		}
+
 		function generateHTML() {
 			if(!$content = $this->getEffectiveValue()) {
 				$content = '';

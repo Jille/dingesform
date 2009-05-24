@@ -1,6 +1,7 @@
 <?php
 	abstract class DingesInputField extends DingesLabelField {
 		protected $required;
+		protected $restrictions = array();
 
 		function __construct($name, $required, $label) {
 			parent::__construct($name, $label);
@@ -17,10 +18,9 @@
 			return true;
 		}
 
-		function fillAttributes() {
-			parent::fillAttributes();
+		function fillRestrictions() {
 			if($this->required) {
-				$this->setAttribute('required', 'true');
+				$this->setRestriction('required', 'true');
 			}
 		}
 

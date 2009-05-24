@@ -1,7 +1,8 @@
 <?php
 	class DingesForm {
 		protected $fields = array();
-		protected $strings = array();
+		// moet protected worden!
+		public $strings = array();
 
 		protected $fieldIdPrefix = '';
 
@@ -19,6 +20,7 @@
 
 		function __construct() {
 			$this->posted = (count($_POST) > 0);
+			$this->setAttribute('id', 'dingesForm');
 			$this->setAttribute('method', 'POST');
 			$this->setAttribute('action', '.');
 		}
@@ -140,6 +142,7 @@
 			}
 			$this->strings['form_open'] .= '>';
 			$this->strings['form_close'] = '</form>';
+			$this->strings['form_init_code'] = "var df = new DingesForm(document.getElementById('dingesForm'));";
 
 			$focusFirst = $this->autoFocus;
 
@@ -156,7 +159,8 @@
 				if($field instanceof DingesLabelField) {
 					$this->strings['label_'. $field->getName()] = $field->getLabelTag();
 				}
-				$this->strings = array_merge($this->strings, $field->render());
+				$renderedStrings = $field->render();
+				$this->strings = array_merge($this->strings, $renderedStrings);
 			}
 		}
 

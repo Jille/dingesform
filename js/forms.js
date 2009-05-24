@@ -1,29 +1,83 @@
-DingesForm = function(formEl) {
+function DingesForm(formEl) {
 	this.form = formEl;
-	var bla = this;
+	this.fields = {};
+	var self = this;
 	this.form.onsubmit = function() {
-		bla.validate();
+		return self.validate();
 	};
 }
 
 DingesForm.prototype = {
-	form: null
+	form: null,
+	fields: null
 };
 
 DingesForm.prototype.validate = function() {
-	var ok = false;
-	for(var i = 0; i < this.form.length; i++) {
-		if(this.form[i].getAttribute('required') == 'true' && this.form[i].value == '') {
-			alert(this.form[i].id);
+	var ok = true;
+	for(var i in this.fields) {
+		var result = this.fields[i].validate();
+		if(result !== true) {
+			this.fields[i].setErrorClass();
+			ok = false;
+		} else {
+			this.fields[i].removeErrorClass();
+		}
+	}
+	return ok;
+}
+
+function DingesFormField(fieldEl) {
+	this.restrictions = {};
+	this.field = fieldEl;
+	var comment = this.field.nextSibling;
+	if(comment && comment.nodeType == 8) {
+		var restrs = comment.nodeValue.split(' ');
+		for(var i = 0; i < restrs.length; i++) {
+			restr = restrs[i].split('=');
+			if(restr.length == 2) {
+				this.restrictions[restr[0]] = restr[1];
+			}
 		}
 	}
 }
 
-DingesFormField = funtion(fieldEl) {
-}
-
 DingesFormField.prototype = {
+	field: null,
+	type: null,
+	restrictions: null
 };
 
+/**
+ * - label class="error"
+ * - field class="error"
+ * - floating box
+ * - errorDiv per veld
+ * - error script (user defined callback)
+ */
 DingesFormField.prototype.validate = function() {
+	var result = true;
+	for(var restriction in this.restrictions) {
+		if(restriction == 'required' && this.restrictions[restriction] == 'true' && this.field.value == '') {
+			result = 'ERR_EMPTY';
+			break;
+		} else if(restriction == 'maxLength' && this.field.value.length > this.restrictions[restriction]) {
+			result = 'ERR_TOO_LONG';
+			break;
+		} else if(restriction == 'min' && !isNaN(this.field.value) && parseInt(this.field.value) < this.restrictions[restriction]) {
+			result = 'ERR_TOO_LARGE';
+			break;
+		} else if(restriction == 'max' && !isNaN(this.field.value) && parseInt(this.field.value) > this.restrictions[restriction]) {
+			result = 'ERR_TOO_SMALL';
+			break;
+		}
+	}
+	return result;
+}
+
+DingesFormField.prototype.setErrorClass = function () {
+	this.field.className += ' dingesError';
+}
+
+DingesFormField.prototype.removeErrorClass = function () {
+	this.field.className = this.field.className.replace(/ dingesError/, '');
 }

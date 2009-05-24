@@ -25,7 +25,8 @@
 	$f->setFieldIdPrefix('blaat_');
 
 	$name = $f->createInputField('text', 'name', true, 'Naam');
-	$name->setDefaultValue('Henk"ie"');
+	//$name->setDefaultValue('Henk"ie"');
+	$name->setMaxLength(20);
 	$name->addValidationRegex('/^\S+$/');
 
 	$bla = $f->createInputField('checkbox', 'bla', false, 'Bla');
@@ -105,6 +106,7 @@
 	$f->render();
 
 	$strings = $f->getStrings();
+
 ?>
 <html>
 	<head>
@@ -117,14 +119,20 @@
 				color: red;
 			}
 		</style>
+		<script type="text/javascript" src="js/forms.js"></script>
 		<script type="text/javascript">
 			function watdanwel_bla() {
 				document.getElementById('watdanwel_tr').style.display = document.getElementById('blaat_id_radiobutton_jaofnee_nee').checked ? '' : 'none';
 				// XXX setRequired('watdanwel');
 			}
+
+			function page_init() {
+				<?= $strings['form_init_code'] ?>
+				watdanwel_bla();
+			}
 		</script>
 	</head>
-	<body onLoad="watdanwel_bla();">
+	<body onload="page_init();">
 <?php if($f->isSubmitted()) { ?>
 		<div style="color: green">OK!</div>
 <?php

@@ -20,5 +20,20 @@
 				$this->setAttribute('maxlength', $this->maxLength);
 			}
 		}
+
+		function fillRestrictions() {
+			parent::fillRestrictions();
+			if(isset($this->maxLength) && $this->maxLength > 0) {
+				$this->setRestriction('maxLength', $this->maxLength);
+			}
+		}
+
+		function setMaxLength($length) {
+			if($length !== NULL) {
+				$this->maxLength = intval($length);
+			} else {
+				$this->maxLength = NULL;
+			}
+		}
 	}
 ?>
