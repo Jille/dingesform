@@ -80,15 +80,30 @@ DingesFormField.prototype.validate = function() {
 }
 
 DingesFormField.prototype.setErrorClass = function () {
-	this.field.className += ' dingesError';
+	dinges_addClass(this.field, 'dingesError');
 	if(this.label) {
-		this.label.className += ' dingesErrorLabel';
+		dinges_addClass(this.label, 'dingesErrorLabel');
 	}
 }
 
 DingesFormField.prototype.removeErrorClass = function () {
-	this.field.className = this.field.className.replace(/ dingesError/, '');
+	dinges_removeClass(this.field, 'dingesError');
 	if(this.label) {
-		this.label.className = this.label.className.replace(/ dingesErrorLabel/, '');
+		dinges_removeClass(this.label, 'dingesErrorLabel');
 	}
+}
+
+function dinges_addClass(el, class) {
+	el.className += ' '+ class;
+}
+
+function dinges_removeClass(el, class) {
+	var classes = el.className.split(/ /);
+	for(var i = 0; classes.length>i; i++) {
+		if(classes[i] == class) {
+			delete classes[i];
+			break;
+		}
+	}
+	el.className = classes.join(' ');
 }
