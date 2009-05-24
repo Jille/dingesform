@@ -6,7 +6,6 @@
 		protected $id;
 
 		protected $value = NULL;
-		protected $defaultValue = NULL;
 
 		protected $element = 'input';
 		protected $attributes = array();
@@ -74,14 +73,6 @@
 			return $this->attributes[$name];
 		}
 
-		function getEffectiveValue() {
-			if($this->form->isPosted() && $this->keepValue) {
-				return $this->value;
-			} else {
-				return $this->defaultValue;
-			}
-		}
-
 		function _setForm($form) {
 			$this->form = $form;
 		}
@@ -132,14 +123,6 @@
 
 		function getValue() {
 			return $this->value;
-		}
-
-		function getDefaultValue() {
-			return $this->defaultValue;
-		}
-
-		function setDefaultValue($value) {
-			$this->defaultValue = $value;
 		}
 
 		function getKeepValue() {

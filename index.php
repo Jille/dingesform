@@ -3,6 +3,7 @@
 	require('form.php');
 	require('magic.php');
 	require('field.php');
+	require('defaultvaluefield.php');
 	require('labelfield.php');
 	require('inputfield.php');
 	require('text.php');

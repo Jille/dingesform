@@ -1,5 +1,5 @@
 <?php
-	abstract class DingesLabelField extends DingesField {
+	abstract class DingesLabelField extends DingesDefaultValueField {
 		protected $label;
 		protected $realLabelTag = true;
 

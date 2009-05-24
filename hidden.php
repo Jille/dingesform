@@ -1,5 +1,5 @@
 <?php
-	class DingesHidden extends DingesField {
+	class DingesHidden extends DingesDefaultValueField {
 		function fillAttributes() {
 			parent::fillAttributes();
 			$this->setAttribute('type', 'hidden');
