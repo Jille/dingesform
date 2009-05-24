@@ -20,6 +20,8 @@
 
 		protected $errorMessages = array();
 
+		protected $errorIcon = NULL;
+
 		function __construct() {
 			$this->posted = (count($_POST) > 0);
 			$this->setAttribute('id', 'dingesForm'); // XXX niet multiform compatible
@@ -146,6 +148,9 @@
 			$this->strings['form_open'] .= '>';
 			$this->strings['form_close'] = '</form>';
 			$this->strings['form_init_code'] = "var df = new DingesForm(document.getElementById('dingesForm'));";
+			if($this->errorIcon) {
+				$this->strings['form_init_code'] .= "\ndf.setErrorIcon('". htmlspecialchars($this->errorIcon, ENT_COMPAT) ."');";
+			}
 
 			$focusFirst = $this->autoFocus;
 
@@ -250,6 +255,14 @@
 
 		function setAutoFocus($value) {
 			$this->autoFocus = $value;
+		}
+
+		function getErrorIcon() {
+			return $this->errorIcon;
+		}
+
+		function setErrorIcon($url) {
+			$this->errorIcon = $url;
 		}
 	}
 

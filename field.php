@@ -73,12 +73,12 @@
 			$strings = array(
 				'element_'. $this->name => $this->generateHTML(),
 				'id_'. $this->name => $this->getFullId(),
-				'error_'. $this->name => $this->generateErrorSpan(),
+				'error_'. $this->name => $this->generateErrorElement(),
 			);
 			return $strings;
 		}
 
-		function generateErrorSpan() {
+		function generateErrorElement() {
 			$attributes = array();
 			$attributes['id'] = $this->getFullId() .'_error';
 			$attributes['class'] = 'dingesErrorSpan';
@@ -87,11 +87,18 @@
 			} else {
 				$content = $this->errorCode;
 			}
+			if($content && $this->form->getErrorIcon()) {
+				$imgattributes = array();
+				$imgattributes['src'] = $this->form->getErrorIcon();
+				$imgattributes['alt'] = $content;
+				$imgattributes['onClick'] = "alert('". str_replace("'", '&#039;', $content) ."');";
+				$content = DingesForm::generateTag('img', $imgattributes);
+			}
 			return DingesForm::generateTag('span', $attributes, $content);
 		}
 
 		function fillFormInitCode() {
-			$this->form->strings['form_init_code'] .= "\ndf.fields['". $this->getAttribute('id') ."'] = new DingesFormField(document.getElementById('". $this->getFullId() ."'));";
+			$this->form->strings['form_init_code'] .= "\ndf.addField('". $this->name ."', new DingesFormField(document.getElementById('". $this->getFullId() ."')));";
 		}
 
 		function setAttribute($name, $value, $append = false) {

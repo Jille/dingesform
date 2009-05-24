@@ -9,8 +9,14 @@ function DingesForm(formEl) {
 
 DingesForm.prototype = {
 	form: null,
-	fields: null
+	fields: null,
+	errorIcon: null
 };
+
+DingesForm.prototype.addField = function(name, field) {
+	this.fields[name] = field;
+	field.setForm(this);
+}
 
 DingesForm.prototype.validate = function() {
 	var ok = true;
@@ -24,6 +30,10 @@ DingesForm.prototype.validate = function() {
 		}
 	}
 	return ok;
+}
+
+DingesForm.prototype.setErrorIcon = function(src) {
+	this.errorIcon = src;
 }
 
 function DingesFormField(fieldEl) {
@@ -44,12 +54,17 @@ function DingesFormField(fieldEl) {
 }
 
 DingesFormField.prototype = {
+	form: null,
 	field: null,
 	label: null,
 	error: null, // let op: dat is het error-span element
 	type: null,
 	restrictions: null
 };
+
+DingesFormField.prototype.setForm = function(form) {
+	this.form = form;
+}
 
 /**
  * - floating box
