@@ -24,7 +24,7 @@
 
 	$f = new DingesForm();
 	$f->setFieldIdPrefix('blaat_');
-	$f->setErrorIcon('exclamation.png');
+	//$f->setErrorIcon('exclamation.png');
 
 	$f->setErrorMessage('ERR_UNSAFE', 'Het wachtwoord mag niet gelijk zijn aan de gebruikersnaam');
 
