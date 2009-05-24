@@ -41,8 +41,14 @@
 			$field->_setForm($this);
 
 			if($this->posted) {
-				if(isset($_POST[$field->getName()])) {
-					$field->_setValue($_POST[$field->getName()]);
+				if($field instanceof DingesFile) {
+					if(isset($_FILES[$field->getName()])) {
+						$field->_setValue($_FILES[$field->getName()]);
+					}
+				} else {
+					if(isset($_POST[$field->getName()])) {
+						$field->_setValue($_POST[$field->getName()]);
+					}
 				}
 			}
 		}

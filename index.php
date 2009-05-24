@@ -19,6 +19,7 @@
 	require('multiplesubmit.php');
 	require('hidden.php');
 	require('submitimage.php');
+	require('file.php');
 
 	$f = new DingesForm();
 	$f->setFieldIdPrefix('blaat_');
@@ -82,6 +83,9 @@
 	foreach(range('a', 'f') as $i) {
 		$klikjerot->addItem($i, strtoupper($i));
 	}
+
+	$fileup = $f->createInputField('file', 'fileup', false, 'Pr0n');
+	$fileup->setMaxFileSize(1024*1024);
 
 	$subm = new DingesSubmit('subm', 'Opst"uren');
 	$f->addField($subm);
@@ -189,6 +193,10 @@
 				<td><?= $strings['element_klikjerot_'. $i] ?> <?= $strings['label_klikjerot_'. $i] ?></td>
 			</tr>
 <?php } ?>
+			<tr>
+				<td><?= $strings['label_fileup'] ?></td>
+				<td><?= $strings['element_fileup'] ?></td>
+			</tr>
 			<tr>
 				<td></td>
 				<td><?= $strings['element_subm'] ?></td>
