@@ -5,7 +5,7 @@
 		}
 
 		function getValue() {
-			return !is_null($this->value);
+			return !is_null(parent::getValue());
 		}
 
 		function fillAttributes() {

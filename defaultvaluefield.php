@@ -4,9 +4,9 @@
 
 		function getEffectiveValue() {
 			if($this->form->isPosted() && $this->keepValue) {
-				return $this->value;
+				return $this->getValue();
 			} else {
-				return $this->defaultValue;
+				return $this->getDefaultValue();
 			}
 		}
 
