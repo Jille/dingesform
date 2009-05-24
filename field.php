@@ -24,6 +24,9 @@
 		}
 
 		function validate($value) {
+			if(!$value) {
+				return true;
+			}
 			foreach($this->validationRegexes as $regex) {
 				if(!preg_match($regex['regex'], $value)) {
 					return $regex['errorCode'];
