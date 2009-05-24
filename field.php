@@ -70,7 +70,7 @@
 		}
 
 		function fillFormInitCode() {
-			$this->form->strings['form_init_code'] .= "\ndf.fields['". $this->getAttribute('id') ."'] = new DingesFormField(document.getElementById('". $this->getAttribute('id') ."'));";
+			$this->form->strings['form_init_code'] .= "\ndf.fields['". $this->getAttribute('id') ."'] = new DingesFormField(document.getElementById('". $this->getFullId() ."'), null);";
 		}
 
 		function setAttribute($name, $value, $append = false) {

@@ -26,9 +26,15 @@ DingesForm.prototype.validate = function() {
 	return ok;
 }
 
-function DingesFormField(fieldEl) {
+function DingesFormField(fieldEl, labelId) {
 	this.restrictions = {};
 	this.field = fieldEl;
+	if(labelId) {
+		labelEl = document.getElementById(labelId)
+		if(labelEl) {
+			this.label = labelEl;
+		}
+	}
 	var comment = this.field.nextSibling;
 	if(comment && comment.nodeType == 8) {
 		var restrs = comment.nodeValue.split(' ');
@@ -43,13 +49,12 @@ function DingesFormField(fieldEl) {
 
 DingesFormField.prototype = {
 	field: null,
+	label: null,
 	type: null,
 	restrictions: null
 };
 
 /**
- * - label class="error"
- * - field class="error"
  * - floating box
  * - errorDiv per veld
  * - error script (user defined callback)
@@ -76,8 +81,14 @@ DingesFormField.prototype.validate = function() {
 
 DingesFormField.prototype.setErrorClass = function () {
 	this.field.className += ' dingesError';
+	if(this.label) {
+		this.label.className += ' dingesErrorLabel';
+	}
 }
 
 DingesFormField.prototype.removeErrorClass = function () {
 	this.field.className = this.field.className.replace(/ dingesError/, '');
+	if(this.label) {
+		this.label.className = this.label.className.replace(/ dingesErrorLabel/, '');
+	}
 }
