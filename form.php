@@ -7,6 +7,8 @@
 
 		protected $posted;
 
+		protected $attributes = array();
+
 		protected $validationErrors;
 		protected $validated = false;
 
@@ -17,6 +19,8 @@
 
 		function __construct() {
 			$this->posted = (count($_POST) > 0);
+			$this->setAttribute('method', 'POST');
+			$this->setAttribute('action', '.');
 		}
 
 		function createInputField($type, $name, $required, $label) {
@@ -104,11 +108,31 @@
 			return $errors;
 		}
 
+		function setAttribute($name, $value, $append = false) {
+			if($append && isset($this->attributes[$name])) {
+				$this->attributes[$name] .= $value;
+			} else {
+				$this->attributes[$name] = $value;
+			}
+		}
+
+		function deleteAttribute($name) {
+			unset($this->attributes[$name]);
+		}
+
+		function getAttribute($name) {
+			return $this->attributes[$name];
+		}
+
 		function render() {
 			if($this->posted && !$this->validated) {
 				$this->validate();
 			}
-			$this->strings['form_open'] = '<form method="POST" action=".">';
+			$this->strings['form_open'] = '<form';
+			foreach($this->attributes as $name => $value) {
+				$this->strings['form_open'] .= ' '. $name .'="'. htmlspecialchars($value) .'"';
+			}
+			$this->strings['form_open'] .= '>';
 			$this->strings['form_close'] = '</form>';
 
 			$focusFirst = $this->autoFocus;
