@@ -133,14 +133,6 @@
 			return $this->restrictions[$name];
 		}
 
-		function getEffectiveValue() {
-			if($this->form->isPosted() && $this->keepValue) {
-				return $this->value;
-			} else {
-				return $this->defaultValue;
-			}
-		}
-
 		function _setForm($form) {
 			$this->form = $form;
 		}
