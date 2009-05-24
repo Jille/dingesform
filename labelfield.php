@@ -65,11 +65,11 @@
 		}
 
 		/* Simple getters and setters */
-		function getLabel() {
+		final function getLabel() {
 			return $this->label;
 		}
 
-		function setLabel($value) {
+		final function setLabel($value) {
 			$this->label = $value;
 		}
 	}

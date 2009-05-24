@@ -182,15 +182,15 @@
 		}
 
 		/* Simple getters and setters */
-		function getName() {
+		final function getName() {
 			return $this->name;
 		}
 
-		function getId() {
+		final function getId() {
 			return $this->id;
 		}
 
-		function setId($value) {
+		final function setId($value) {
 			$this->id = $value;
 		}
 
@@ -198,11 +198,11 @@
 			return $this->value;
 		}
 
-		function getKeepValue() {
+		final function getKeepValue() {
 			return $this->keepValue;
 		}
 
-		function setKeepValue($value) {
+		final function setKeepValue($value) {
 			$this->keepValue = $value;
 		}
 	}

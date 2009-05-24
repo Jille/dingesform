@@ -30,19 +30,19 @@
 		}
 
 		/* Simple getters and setters */
-		function getMin() {
+		final function getMin() {
 			return $this->min;
 		}
 
-		function setMin($value) {
+		final function setMin($value) {
 			$this->min = $value;
 		}
 
-		function getMax() {
+		final function getMax() {
 			return $this->max;
 		}
 
-		function setMax($value) {
+		final function setMax($value) {
 			$this->max = $value;
 		}
 	}

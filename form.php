@@ -238,27 +238,27 @@
 		}
 
 		/* Simple getters and setters */
-		function getFieldIdPrefix() {
+		final function getFieldIdPrefix() {
 			return $this->fieldIdPrefix;
 		}
 
-		function setFieldIdPrefix($value) {
+		final function setFieldIdPrefix($value) {
 			$this->fieldIdPrefix = $value;
 		}
 
-		function getAutoFocus() {
+		final function getAutoFocus() {
 			return $this->autoFocus;
 		}
 
-		function setAutoFocus($value) {
+		final function setAutoFocus($value) {
 			$this->autoFocus = $value;
 		}
 
-		function getErrorIcon() {
+		final function getErrorIcon() {
 			return $this->errorIcon;
 		}
 
-		function setErrorIcon($url) {
+		final function setErrorIcon($url) {
 			$this->errorIcon = $url;
 		}
 	}

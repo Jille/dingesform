@@ -36,11 +36,11 @@
 		}
 
 		/* Simple getters and setters */
-		function getRequired() {
+		final function getRequired() {
 			return $this->required;
 		}
 
-		function setRequired($value) {
+		final function setRequired($value) {
 			$this->required = $value;
 		}
 	}
