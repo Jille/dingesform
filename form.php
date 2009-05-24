@@ -18,11 +18,14 @@
 		protected $preValidationHooks = array();
 		protected $validationCallbacks = array();
 
+		protected $errorMessages = array();
+
 		function __construct() {
 			$this->posted = (count($_POST) > 0);
 			$this->setAttribute('id', 'dingesForm'); // XXX niet multiform compatible
 			$this->setAttribute('method', 'POST');
 			$this->setAttribute('action', '.');
+			$this->setDefaultErrorMessages();
 		}
 
 		function createInputField($type, $name, $required, $label) {
@@ -102,7 +105,7 @@
 			if(!$this->validationErrors) {
 				return false;
 			}
-			return $this->validationErrors[0]['message'];
+			return $this->errorMessages[$this->validationErrors[0]['message']];
 		}
 
 		function getValidationErrors() {
@@ -111,7 +114,7 @@
 			}
 			$errors = array();
 			foreach($this->validationErrors as $error) {
-				$errors[] = $error['message'];
+				$errors[] = $this->errorMessages[$error['message']];
 			}
 			return $errors;
 		}
@@ -212,6 +215,20 @@
 				$out .= ' />';
 			}
 			return $out;
+		}
+
+		function setDefaultErrorMessages() {
+			$this->errorMessages['ERR_INVALID'] = 'De waarde van dit veld is niet correct';
+			$this->errorMessages['ERR_EMPTY'] = 'Dit veld is verplicht';
+			$this->errorMessages['ERR_NON_INTEGER'] = 'De waarde in dit veld is niet numeriek';
+			$this->errorMessages['ERR_UNDER_MIN'] = 'De ingevulde waarde is te laag';
+			$this->errorMessages['ERR_OVER_MAX'] = 'De ingevulde waarde is te hoog';
+			$this->errorMessages['ERR_OVER_MAXLENGTH'] = 'De ingevulde waarde is te lang';
+			$this->errorMessages['ERR_UNKNOWN_OPTION'] = 'De gekozen optie bestaat niet';
+			$this->errorMessages['ERR_FILE_TECHNICAL'] = 'Er is iets misgegaan bij het oversturen van het bestand';
+			$this->errorMessages['ERR_FILE_TOO_BIG'] = 'Het overgestuurde bestand is te groot';
+			$this->errorMessages['ERR_FILE_TOO_SMALL'] = 'Het overgestuurde bestand is te klein';
+			$this->errorMessages['ERR_UNSAFE'] = 'Uw wachtwoord mag niet geblijk zijn aan uw gebruikersnaam';
 		}
 
 		/* Simple getters and setters */

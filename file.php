@@ -45,7 +45,8 @@
 				return 'ERR_FILE_TOO_SMALL';
 			}
 			if(!is_uploaded_file($value['tmp_name'])) {
-				return 'ERR_HIJACK';
+				// Hijack??
+				return 'ERR_FILE_TECHNICAL';
 			}
 			return true;
 		}
