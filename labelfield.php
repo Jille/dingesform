@@ -3,6 +3,8 @@
 		protected $label;
 		protected $realLabelTag = true;
 
+		protected $labelAttributes = array();
+
 		function __construct($name, $label) {
 			parent::__construct($name);
 			$this->label = $label;
@@ -17,7 +19,7 @@
 		}
 
 		function getLabelTag() {
-			$attributes = array();
+			$attributes = $this->labelAttributes;
 			if($this->realLabelTag) {
 				$element = 'label';
 				$attributes['for'] = $this->getFullId();
@@ -26,9 +28,29 @@
 			}
 			$attributes['id'] = $this->getFullLabelId();
 			if($this->isValid() === false) {
-				$attributes['class'] = 'dingesErrorLabel';
+				if(isset($attributes['class'])) {
+					$attributes['class'] .= ' dingesErrorLabel';
+				} else {
+					$attributes['class'] = 'dingesErrorLabel';
+				}
 			}
 			return DingesForm::generateTag($element, $attributes, $this->label);
+		}
+
+		function setLabelAttribute($name, $value, $append = false) {
+			if($append && isset($this->labelAttributes[$name])) {
+				$this->labelAttributes[$name] .= $value;
+			} else {
+				$this->labelAttributes[$name] = $value;
+			}
+		}
+
+		function deleteLabelAttribute($name) {
+			unset($this->labelAttributes[$name]);
+		}
+
+		function getLabelAttribute($name) {
+			return $this->labelAttributes[$name];
 		}
 
 		function fillFormInitCode() {
