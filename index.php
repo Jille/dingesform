@@ -23,6 +23,7 @@
 	require('file.php');
 
 	$f = new DingesForm();
+	$f->setAutoFocus(true);
 	$f->setFieldIdPrefix('blaat_');
 	//$f->setErrorIcon('exclamation.png');
 

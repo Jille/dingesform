@@ -153,19 +153,24 @@
 			}
 
 			$focusFirst = $this->autoFocus;
+			$focusOn = false;
 
 			if($focusFirst && $this->posted && count($this->validationErrors) > 0) {
-				$this->validationErrors[0]['field']->setAttribute("focus", "true");
+				$focusOn = $this->validationErrors[0]['field']->getName();
 				$focusFirst = false;
 			}
 
 			foreach($this->fields as $field) {
 				if($focusFirst) {
-					$field->setAttribute("focus", "true");
+					$focusOn = $field->getName();
 					$focusFirst = false;
 				}
 				$fieldStrings = $field->render();
 				$this->strings = array_merge($this->strings, $fieldStrings);
+			}
+
+			if($focusOn) {
+				$this->strings['form_init_code'] .= "\ndf.setFocus('". $focusOn ."');";
 			}
 		}
 

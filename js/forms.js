@@ -18,6 +18,10 @@ DingesForm.prototype.addField = function(name, field) {
 	field.setForm(this);
 }
 
+DingesForm.prototype.setFocus = function(fname) {
+	this.fields[fname].field.focus();
+}
+
 DingesForm.prototype.validate = function() {
 	var ok = true;
 	for(var i in this.fields) {
