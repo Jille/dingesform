@@ -11,6 +11,7 @@
 		protected $attributes = array();
 
 		protected $valid = NULL;
+		protected $errorCode = NULL;
 
 		protected $keepValue = true;
 
@@ -65,8 +66,20 @@
 			$strings = array(
 				'element_'. $this->name => $this->generateHTML(),
 				'id_'. $this->name => $this->getFullId(),
+				'error_'. $this->name => $this->generateErrorSpan(),
 			);
 			return $strings;
+		}
+
+		function generateErrorSpan() {
+			$attributes = array();
+			$attributes['id'] = $this->form->getFieldIdPrefix() .'error_'. $this->name;
+			if($this->valid) {
+				$content = '';
+			} else {
+				$content = $this->errorCode;
+			}
+			return DingesForm::generateTag('span', $attributes, $content);
 		}
 
 		function fillFormInitCode() {
@@ -121,8 +134,9 @@
 			$this->value = $value;
 		}
 
-		function _setValid($bool) {
+		function _setValid($bool, $errorCode = NULL) {
 			$this->valid = $bool;
+			$this->errorCode = $errorCode;
 		}
 
 		function isValid() {

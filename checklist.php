@@ -14,6 +14,7 @@
 				$strings['element_'. $this->name .'_'. $item['value']] = $this->generateItemHTML($item, $value && in_array($item['value'], $value));
 				$strings['label_'. $this->name .'_'. $item['value']] = $this->getItemLabelTag($item);
 			}
+			$strings['error_'. $this->name] = $this->generateErrorSpan();
 			return $strings;
 		}
 	}

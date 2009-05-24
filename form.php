@@ -68,7 +68,7 @@
 
 			foreach($this->fields as $field) {
 				if(($error = $field->validate($field->getValue())) !== true) {
-					$field->_setValid(false);
+					$field->_setValid(false, $error);
 					$this->validationErrors[] = array('field' => $field, 'message' => $error);
 				} else {
 					$field->_setValid(true);

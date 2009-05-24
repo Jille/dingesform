@@ -151,34 +151,42 @@
 			<tr>
 				<td><?= $strings['label_name'] ?></td>
 				<td><?= $strings['element_name'] ?></td>
+				<td><?= $strings['error_name'] ?></td>
 			</tr>
 			<tr>
 				<td><?= $strings['label_bla'] ?></td>
 				<td><?= $strings['element_bla'] ?></td>
+				<td><?= $strings['error_bla'] ?></td>
 			</tr>
 			<tr>
 				<td><?= $strings['label_boink'] ?></td>
 				<td><?= $strings['element_boink'] ?></td>
+				<td><?= $strings['error_boink'] ?></td>
 			</tr>
 			<tr>
 				<td><?= $strings['label_piet'] ?></td>
 				<td><?= $strings['element_piet'] ?></td>
+				<td><?= $strings['error_piet'] ?></td>
 			</tr>
 			<tr>
 				<td><?= $strings['label_int'] ?></td>
 				<td><?= $strings['element_int'] ?></td>
+				<td><?= $strings['error_int'] ?></td>
 			</tr>
 			<tr>
 				<td><?= $strings['label_bier'] ?></td>
 				<td><?= $strings['element_bier'] ?></td>
+				<td><?= $strings['error_bier'] ?></td>
 			</tr>
 			<tr>
 				<td><?= $strings['label_pass'] ?></td>
 				<td><?= $strings['element_pass'] ?></td>
+				<td><?= $strings['error_pass'] ?></td>
 			</tr>
 			<tr>
 				<td><?= $strings['label_jaofnee'] ?></td>
 				<td><?= $strings['element_jaofnee_ja'] .' '. $strings['label_jaofnee_ja'] ?></td>
+				<td><?= $strings['error_jaofnee'] ?></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -187,14 +195,17 @@
 			<tr id="watdanwel_tr">
 				<td><?= $strings['label_watdanwel'] ?></td>
 				<td><?= $strings['element_watdanwel'] ?></td>
+				<td><?= $strings['error_watdanwel'] ?></td>
 			</tr>
 			<tr>
 				<td><?= $strings['label_favbier'] ?></td>
 				<td><?= $strings['element_favbier'] ?></td>
+				<td><?= $strings['error_favbier'] ?></td>
 			</tr>
 			<tr>
 				<td><?= $strings['label_klikjerot'] ?></td>
 				<td><?= $strings['element_klikjerot_a'] ?> <?= $strings['label_klikjerot_a'] ?></td>
+				<td><?= $strings['error_klikjerot'] ?></td>
 			</tr>
 <?php foreach(range('b', 'f') as $i) { ?>
 			<tr>
@@ -205,6 +216,7 @@
 			<tr>
 				<td><?= $strings['label_fileup'] ?></td>
 				<td><?= $strings['element_fileup'] ?></td>
+				<td><?= $strings['error_fileup'] ?></td>
 			</tr>
 			<tr>
 				<td></td>
