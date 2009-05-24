@@ -6,6 +6,7 @@
 	require('defaultvaluefield.php');
 	require('labelfield.php');
 	require('inputfield.php');
+	require('multiinputfield.php');
 	require('text.php');
 	require('checkbox.php');
 	require('submit.php');
