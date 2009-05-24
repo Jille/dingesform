@@ -87,7 +87,7 @@
 		}
 
 		function fillFormInitCode() {
-			$this->form->strings['form_init_code'] .= "\ndf.fields['". $this->getAttribute('id') ."'] = new DingesFormField(document.getElementById('". $this->getFullId() ."'), null);";
+			$this->form->strings['form_init_code'] .= "\ndf.fields['". $this->getAttribute('id') ."'] = new DingesFormField(document.getElementById('". $this->getFullId() ."'));";
 		}
 
 		function setAttribute($name, $value, $append = false) {

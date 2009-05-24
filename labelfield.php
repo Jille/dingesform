@@ -53,10 +53,6 @@
 			return $this->labelAttributes[$name];
 		}
 
-		function fillFormInitCode() {
-			$this->form->strings['form_init_code'] .= "\ndf.fields['". $this->getAttribute('id') ."'] = new DingesFormField(document.getElementById('". $this->getFullId() ."'), '". $this->getFullLabelId() ."');";
-		}
-
 		/* Simple getters and setters */
 		function getLabel() {
 			return $this->label;

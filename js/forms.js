@@ -17,24 +17,20 @@ DingesForm.prototype.validate = function() {
 	for(var i in this.fields) {
 		var result = this.fields[i].validate();
 		if(result !== true) {
-			this.fields[i].setErrorClass();
+			this.fields[i].setError(result);
 			ok = false;
 		} else {
-			this.fields[i].removeErrorClass();
+			this.fields[i].removeError();
 		}
 	}
 	return ok;
 }
 
-function DingesFormField(fieldEl, labelId) {
+function DingesFormField(fieldEl) {
 	this.restrictions = {};
 	this.field = fieldEl;
-	if(labelId) {
-		labelEl = document.getElementById(labelId)
-		if(labelEl) {
-			this.label = labelEl;
-		}
-	}
+	this.label = document.getElementById(fieldEl.id +'_label');
+	this.error = document.getElementById(fieldEl.id +'_error');
 	var comment = this.field.nextSibling;
 	if(comment && comment.nodeType == 8) {
 		var restrs = comment.nodeValue.split(' ');
@@ -50,6 +46,7 @@ function DingesFormField(fieldEl, labelId) {
 DingesFormField.prototype = {
 	field: null,
 	label: null,
+	error: null, // let op: dat is het error-span element
 	type: null,
 	restrictions: null
 };
@@ -82,17 +79,25 @@ DingesFormField.prototype.validate = function() {
 	return result;
 }
 
-DingesFormField.prototype.setErrorClass = function () {
+DingesFormField.prototype.setError = function (errorCode) {
+	this.setErrorSpan(errorCode); // XXX vertalen
 	dinges_addClass(this.field, 'dingesError');
 	if(this.label) {
 		dinges_addClass(this.label, 'dingesErrorLabel');
 	}
 }
 
-DingesFormField.prototype.removeErrorClass = function () {
+DingesFormField.prototype.removeError = function () {
+	this.setErrorSpan('');
 	dinges_removeClass(this.field, 'dingesError');
 	if(this.label) {
 		dinges_removeClass(this.label, 'dingesErrorLabel');
+	}
+}
+
+DingesFormField.prototype.setErrorSpan = function (text) {
+	if(this.error) {
+		this.error.innerHTML = text;
 	}
 }
 
