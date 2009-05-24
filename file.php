@@ -32,7 +32,7 @@
 			if($this->required && (!$value || $value['error'] == UPLOAD_ERR_NO_FILE)) {
 				return 'ERR_EMPTY';
 			}
-			if(!$value) {
+			if(!$value || $value['tmp_name'] == '') {
 				return true;
 			}
 			if($value['error'] == UPLOAD_ERR_PARTIAL || $value['error'] == UPLOAD_ERR_NO_TMP_DIR || $value['error'] == UPLOAD_ERR_CANT_WRITE || $value['error'] == UPLOAD_ERR_EXTENSION) {
