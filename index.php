@@ -238,6 +238,7 @@
 		</table>
 		<?= $strings['element_hide'] ?>
 		<?= $strings['form_close'] ?>
+		<input type="button" onClick="document.getElementById('dingesForm').onsubmit='';" value="kill javascript validation"><br />
 		Strings:
 		<ul>
 <?php foreach(array_keys($strings) as $key) { ?>
