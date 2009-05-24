@@ -170,6 +170,7 @@
 			}
 
 			if($focusOn) {
+				// XXX uitzoeken hoe je javascript perfect encode't
 				$this->strings['form_init_code'] .= "\ndf.setFocus('". $focusOn ."');";
 			}
 		}
