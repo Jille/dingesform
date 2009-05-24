@@ -10,6 +10,13 @@
 			$this->label = $label;
 		}
 
+		function render() {
+			$strings = parent::render();
+			$this->fillLabelAttributes();
+			$strings['label_'. $this->getName()] = $this->getLabelTag();
+			return $strings;
+		}
+
 		function getLabelId() {
 			return $this->getId() .'_label';
 		}
@@ -18,23 +25,25 @@
 			return $this->form->getFieldIdPrefix() . $this->getLabelId();
 		}
 
+		function fillLabelAttributes() {
+			$this->setLabelAttribute('id', $this->getFullLabelId());
+			if($this->isValid() === false) {
+				if($this->getLabelAttribute('class')) {
+					$this->setLabelAttribute('class', ' dingesErrorLabel', true);
+				} else {
+					$this->setLabelAttribute('class', 'dingesErrorLabel');
+				}
+			}
+		}
+
 		function getLabelTag() {
-			$attributes = $this->labelAttributes;
 			if($this->realLabelTag) {
 				$element = 'label';
-				$attributes['for'] = $this->getFullId();
+				$this->setLabelAttribute('for', $this->getFullId());
 			} else {
 				$element = 'span';
 			}
-			$attributes['id'] = $this->getFullLabelId();
-			if($this->isValid() === false) {
-				if(isset($attributes['class'])) {
-					$attributes['class'] .= ' dingesErrorLabel';
-				} else {
-					$attributes['class'] = 'dingesErrorLabel';
-				}
-			}
-			return DingesForm::generateTag($element, $attributes, $this->label);
+			return DingesForm::generateTag($element, $this->labelAttributes, $this->label);
 		}
 
 		function setLabelAttribute($name, $value, $append = false) {
@@ -50,7 +59,9 @@
 		}
 
 		function getLabelAttribute($name) {
-			return $this->labelAttributes[$name];
+			if(isset($this->labelAttributes[$name])) {
+				return $this->labelAttributes[$name];
+			}
 		}
 
 		/* Simple getters and setters */

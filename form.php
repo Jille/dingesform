@@ -164,11 +164,8 @@
 					$field->setAttribute("focus", "true");
 					$focusFirst = false;
 				}
-				if($field instanceof DingesLabelField) {
-					$this->strings['label_'. $field->getName()] = $field->getLabelTag();
-				}
-				$renderedStrings = $field->render();
-				$this->strings = array_merge($this->strings, $renderedStrings);
+				$fieldStrings = $field->render();
+				$this->strings = array_merge($this->strings, $fieldStrings);
 			}
 		}
 

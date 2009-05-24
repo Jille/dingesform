@@ -18,6 +18,17 @@
 			return true;
 		}
 
+		function fillLabelAttributes() {
+			parent::fillLabelAttributes();
+			if($this->required) {
+				if($this->getLabelAttribute('class')) {
+					$this->setLabelAttribute('class', ' dingesLabelRequired', true);
+				} else {
+					$this->setLabelAttribute('class', 'dingesLabelRequired');
+				}
+			}
+		}
+
 		function fillRestrictions() {
 			if($this->required) {
 				$this->setRestriction('required', 'true');
