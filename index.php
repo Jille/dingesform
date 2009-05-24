@@ -25,9 +25,11 @@
 	$f = new DingesForm();
 	$f->setFieldIdPrefix('blaat_');
 
+	$f->setErrorMessage('ERR_UNSAFE', 'Het wachtwoord mag niet gelijk zijn aan de gebruikersnaam');
+
 	$name = $f->createInputField('text', 'name', true, 'Naam');
-	//$name->setDefaultValue('Henk"ie"');
 	$name->setMaxLength(20);
+	$name->setMinLength(5);
 	$name->addValidationRegex('/^\S+$/');
 
 	$bla = $f->createInputField('checkbox', 'bla', false, 'Bla');
@@ -40,6 +42,7 @@
 
 	$piet = $f->createInputField('textarea', 'piet', false, 'Piet"je"');
 	$piet->setDefaultValue("lalala, \"BIER!\" <br>\n</textarea>");
+	$piet->setMinLength(100);
 
 	$int = $f->createInputField('integer', 'int', true, 'Int<br>eger');
 	$int->setMin(10);

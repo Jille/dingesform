@@ -66,13 +66,16 @@ DingesFormField.prototype.validate = function() {
 			result = 'ERR_EMPTY';
 			break;
 		} else if(restriction == 'maxLength' && this.field.value.length > this.restrictions[restriction]) {
-			result = 'ERR_TOO_LONG';
+			result = 'ERR_OVER_MAXLENGTH';
+			break;
+		} else if(restriction == 'minLength' && this.field.value.length < this.restrictions[restriction]) {
+			result = 'ERR_OVER_MINLENGTH';
 			break;
 		} else if(restriction == 'min' && !isNaN(this.field.value) && parseInt(this.field.value) < this.restrictions[restriction]) {
-			result = 'ERR_TOO_LARGE';
+			result = 'ERR_OVER_MAX';
 			break;
 		} else if(restriction == 'max' && !isNaN(this.field.value) && parseInt(this.field.value) > this.restrictions[restriction]) {
-			result = 'ERR_TOO_SMALL';
+			result = 'ERR_UNDER_MIN';
 			break;
 		}
 	}
@@ -93,14 +96,14 @@ DingesFormField.prototype.removeErrorClass = function () {
 	}
 }
 
-function dinges_addClass(el, class) {
-	el.className += ' '+ class;
+function dinges_addClass(el, className) {
+	el.className += ' '+ className;
 }
 
-function dinges_removeClass(el, class) {
+function dinges_removeClass(el, className) {
 	var classes = el.className.split(/ /);
 	for(var i = 0; classes.length>i; i++) {
-		if(classes[i] == class) {
+		if(classes[i] == className) {
 			delete classes[i];
 			break;
 		}

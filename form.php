@@ -217,6 +217,10 @@
 			return $out;
 		}
 
+		function setErrorMessage($key, $value) {
+			$this->errorMessages[$key] = strval($value);
+		}
+
 		function setDefaultErrorMessages() {
 			$this->errorMessages['ERR_INVALID'] = 'De waarde van dit veld is niet correct';
 			$this->errorMessages['ERR_EMPTY'] = 'Dit veld is verplicht';
@@ -224,11 +228,11 @@
 			$this->errorMessages['ERR_UNDER_MIN'] = 'De ingevulde waarde is te laag';
 			$this->errorMessages['ERR_OVER_MAX'] = 'De ingevulde waarde is te hoog';
 			$this->errorMessages['ERR_OVER_MAXLENGTH'] = 'De ingevulde waarde is te lang';
+			$this->errorMessages['ERR_UNDER_MINLENGTH'] = 'De ingevulde waarde is te kort';
 			$this->errorMessages['ERR_UNKNOWN_OPTION'] = 'De gekozen optie bestaat niet';
 			$this->errorMessages['ERR_FILE_TECHNICAL'] = 'Er is iets misgegaan bij het oversturen van het bestand';
 			$this->errorMessages['ERR_FILE_TOO_BIG'] = 'Het overgestuurde bestand is te groot';
 			$this->errorMessages['ERR_FILE_TOO_SMALL'] = 'Het overgestuurde bestand is te klein';
-			$this->errorMessages['ERR_UNSAFE'] = 'Uw wachtwoord mag niet geblijk zijn aan uw gebruikersnaam';
 		}
 
 		/* Simple getters and setters */
