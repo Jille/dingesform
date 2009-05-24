@@ -112,7 +112,20 @@ DingesFormField.prototype.removeError = function () {
 
 DingesFormField.prototype.setErrorSpan = function (text) {
 	if(this.error) {
-		this.error.innerHTML = text;
+		if(this.form.errorIcon) {
+			if(text) {
+				this.error.innerHTML = '';
+				var img = document.createElement('img');
+				img.alt = text;
+				img.src = this.form.errorIcon;
+				img.onclick = function () { alert(text); }
+				this.error.appendChild(img);
+			} else {
+				this.error.innerHTML = '';
+			}
+		} else {
+			this.error.innerHTML = text;
+		}
 	}
 }
 
