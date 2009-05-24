@@ -13,12 +13,12 @@
 		function render() {
 			$strings = parent::render();
 			$this->fillLabelAttributes();
-			$strings['label_'. $this->getName()] = $this->getLabelTag();
+			$strings['label_'. $this->name] = $this->getLabelTag();
 			return $strings;
 		}
 
 		function getLabelId() {
-			return $this->getId() .'_label';
+			return $this->id .'_label';
 		}
 
 		function getFullLabelId() {
