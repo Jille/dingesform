@@ -50,6 +50,10 @@
 
 		function generateHTML() {
 			$tag = DingesForm::generateTag($this->element, $this->attributes);
+			return $tag . $this->getRestrictionComment();
+		}
+
+		function getRestrictionComment() {
 			$comment = '<!-- ';
 			if(isset($this->restrictions)) {
 				foreach($this->restrictions as $k => $v) {
@@ -57,7 +61,7 @@
 				}
 			}
 			$comment .= '-->';
-			return $tag . $comment;
+			return $comment;
 		}
 
 		function render() {

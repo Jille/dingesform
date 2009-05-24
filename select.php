@@ -50,7 +50,7 @@
 				}
 				$options .= DingesForm::generateTag('option', $attributes, $option['content']);
 			}
-			return DingesForm::generateTag($this->element, $this->attributes, $options);
+			return DingesForm::generateTag($this->element, $this->attributes, $options) . $this->getRestrictionComment();
 		}
 	}
 ?>

@@ -40,7 +40,7 @@
 			if(!$content = $this->getEffectiveValue()) {
 				$content = '';
 			}
-			return DingesForm::generateTag($this->element, $this->attributes, htmlspecialchars($content, ENT_NOQUOTES));
+			return DingesForm::generateTag($this->element, $this->attributes, htmlspecialchars($content, ENT_NOQUOTES)) . $this->getRestrictionComment();
 		}
 
 		function setMaxLength($length) {
