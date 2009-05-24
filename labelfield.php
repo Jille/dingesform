@@ -8,15 +8,23 @@
 			$this->label = $label;
 		}
 
+		function getLabelId() {
+			return 'label_'. $this->getId();
+		}
+
+		function getFullLabelId() {
+			return $this->form->getFieldIdPrefix() .'label_'. $this->getId();
+		}
+
 		function getLabelTag() {
 			$attributes = array();
 			if($this->realLabelTag) {
 				$element = 'label';
-				$attributes['for'] = $this->form->getFieldIdPrefix() . $this->id;
+				$attributes['for'] = $this->getFullId();
 			} else {
 				$element = 'span';
 			}
-			$attributes['id'] = $this->form->getFieldIdPrefix() .'label_'. $this->id;
+			$attributes['id'] = $this->getFullLabelId();
 			if($this->isValid() === false) {
 				$attributes['class'] = 'dingesErrorLabel';
 			}
@@ -31,6 +39,5 @@
 		function setLabel($value) {
 			$this->label = $value;
 		}
-
 	}
 ?>

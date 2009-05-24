@@ -122,7 +122,7 @@
 		<script type="text/javascript" src="js/forms.js"></script>
 		<script type="text/javascript">
 			function watdanwel_bla() {
-				document.getElementById('watdanwel_tr').style.display = document.getElementById('blaat_id_radiobutton_jaofnee_nee').checked ? '' : 'none';
+				document.getElementById('watdanwel_tr').style.display = document.getElementById('blaat_jaofnee_nee').checked ? '' : 'none';
 				// XXX setRequired('watdanwel');
 			}
 
@@ -177,11 +177,11 @@
 			</tr>
 			<tr>
 				<td><?= $strings['label_jaofnee'] ?></td>
-				<td><?= $strings['radiobutton_jaofnee_ja'] .' '. $strings['label_radiobutton_jaofnee_ja'] ?></td>
+				<td><?= $strings['element_jaofnee_ja'] .' '. $strings['label_jaofnee_ja'] ?></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td><?= $strings['radiobutton_jaofnee_nee'] .' '. $strings['label_radiobutton_jaofnee_nee'] ?></td>
+				<td><?= $strings['element_jaofnee_nee'] .' '. $strings['label_jaofnee_nee'] ?></td>
 			</tr>
 			<tr id="watdanwel_tr">
 				<td><?= $strings['label_watdanwel'] ?></td>

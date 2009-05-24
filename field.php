@@ -37,7 +37,7 @@
 		}
 
 		function fillAttributes() {
-			$this->setAttribute('id', $this->form->getFieldIdPrefix() . $this->id);
+			$this->setAttribute('id', $this->getFullId());
 			$this->setAttribute('name', $this->name);
 			if($this->isValid() === false) {
 				$this->setAttribute('class', 'dingesError');
@@ -64,7 +64,7 @@
 			}
 			$strings = array(
 				'element_'. $this->name => $this->generateHTML(),
-				'id_'. $this->name => $this->form->getFieldIdPrefix() . $this->id,
+				'id_'. $this->name => $this->getFullId(),
 			);
 			return $strings;
 		}
@@ -146,6 +146,10 @@
 
 		function clearValidationCallbacks() {
 			$this->validationCallbacks = array();
+		}
+
+		function getFullId() {
+			return $this->form->getFieldIdPrefix() . $this->getId();
 		}
 
 		/* Simple getters and setters */

@@ -3,7 +3,7 @@
 		protected $realLabelTag = false;
 
 		function generateHTML() {
-			return DingesForm::generateTag('span', array('id' => $this->form->getFieldIdPrefix() . $this->id), $this->getDefaultValue());
+			return DingesForm::generateTag('span', array('id' => $this->getFullId()), $this->getDefaultValue());
 		}
 	}
 ?>

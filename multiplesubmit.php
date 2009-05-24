@@ -20,7 +20,7 @@
 			$strings = array();
 			foreach($this->options as $key=>$value) {
 				$attributes = $this->attributes;
-				$attributes['id'] = $this->form->getFieldIdPrefix() . $this->id .'_'. $key;
+				$attributes['id'] = $this->getFullId() .'_'. $key;
 				$attributes['value'] = $value;
 				$strings['element_'. $this->name .'_'. $key] = DingesForm::generateTag('input', $attributes);
 			}

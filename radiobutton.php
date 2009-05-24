@@ -4,7 +4,7 @@
 		protected $realLabelTag = false;
 
 		function addItem($value, $content, $escape_html = true) {
-			$this->options[$value] = array('value' => $value, 'content' => htmlspecialchars($content, ENT_NOQUOTES, NULL, false), 'id' => $this->form->getFieldIdPrefix() .'id_radiobutton_'. $this->name .'_'. $value);
+			$this->options[$value] = array('value' => $value, 'content' => htmlspecialchars($content, ENT_NOQUOTES, NULL, false), 'id' => $this->getFullId() .'_'. $value);
 		}
 
 		function validate($value) {
@@ -22,8 +22,8 @@
 			$this->fillAttributes();
 			$strings = array();
 			foreach($this->options as $option) {
-				$strings['radiobutton_'. $this->name .'_'. $option['value']] = $this->generateHTML($option);
-				$strings['label_radiobutton_'. $this->name .'_'. $option['value']] = $this->getRadioLabelTag($option);
+				$strings['element_'. $this->name .'_'. $option['value']] = $this->generateHTML($option);
+				$strings['label_'. $this->name .'_'. $option['value']] = $this->getRadioLabelTag($option);
 			}
 			return $strings;
 		}
@@ -47,7 +47,7 @@
 		function getRadioLabelTag($option) {
 			$attributes = array();
 			$attributes['for'] = $option['id'];
-			$attributes['id'] = $this->form->getFieldIdPrefix() .'label_'. $this->id .'_'. $option['value'];
+			$attributes['id'] = $this->getFullLabelId() .'_'. $option['value'];
 			return DingesForm::generateTag('label', $attributes, $option['content']);
 		}
 	}
