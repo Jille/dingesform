@@ -11,11 +11,11 @@
 		}
 
 		function getLabelId() {
-			return 'label_'. $this->getId();
+			return $this->getId() .'_label';
 		}
 
 		function getFullLabelId() {
-			return $this->form->getFieldIdPrefix() .'label_'. $this->getId();
+			return $this->form->getFieldIdPrefix() . $this->getLabelId();
 		}
 
 		function getLabelTag() {

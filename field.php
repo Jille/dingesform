@@ -73,8 +73,9 @@
 
 		function generateErrorSpan() {
 			$attributes = array();
-			$attributes['id'] = $this->form->getFieldIdPrefix() .'error_'. $this->name;
-			if($this->valid) {
+			$attributes['id'] = $this->getFullId() .'_error';
+			$attributes['class'] = 'dingesErrorSpan';
+			if($this->isValid() || !$this->form->isPosted()) {
 				$content = '';
 			} else {
 				$content = $this->errorCode;
