@@ -1,6 +1,7 @@
 function DingesForm(formEl) {
 	this.form = formEl;
 	this.fields = {};
+	this.errorMessages = {};
 	var self = this;
 	this.form.onsubmit = function() {
 		return self.validate();
@@ -10,6 +11,7 @@ function DingesForm(formEl) {
 DingesForm.prototype = {
 	form: null,
 	fields: null,
+	errorMessages: null,
 	errorIcon: null
 };
 
@@ -34,6 +36,18 @@ DingesForm.prototype.validate = function() {
 		}
 	}
 	return ok;
+}
+
+DingesForm.prototype.setErrorMessage = function(key, msg) {
+	this.errorMessages[key] = msg;
+}
+
+DingesForm.prototype.getError = function(key) {
+	if(this.errorMessages[key]) {
+		return this.errorMessages[key];
+	} else {
+		'Er is een onbekende fout opgetreden';
+	}
 }
 
 DingesForm.prototype.setErrorIcon = function(src) {
@@ -85,7 +99,7 @@ DingesFormField.prototype.validate = function() {
 			result = 'ERR_OVER_MAXLENGTH';
 			break;
 		} else if(restriction == 'minLength' && this.field.value.length < this.restrictions[restriction]) {
-			result = 'ERR_OVER_MINLENGTH';
+			result = 'ERR_UNDER_MINLENGTH';
 			break;
 		} else if(restriction == 'min' && !isNaN(this.field.value) && parseInt(this.field.value) < this.restrictions[restriction]) {
 			result = 'ERR_OVER_MAX';
@@ -99,7 +113,7 @@ DingesFormField.prototype.validate = function() {
 }
 
 DingesFormField.prototype.setError = function (errorCode) {
-	this.setErrorSpan(errorCode); // XXX vertalen
+	this.setErrorSpan(this.form.getError(errorCode)); // XXX vertalen
 	dinges_addClass(this.field, 'dingesError');
 	if(this.label) {
 		dinges_addClass(this.label, 'dingesErrorLabel');
@@ -114,7 +128,7 @@ DingesFormField.prototype.removeError = function () {
 	}
 }
 
-DingesFormField.prototype.setErrorSpan = function (text) {
+DingesFormField.prototype.setErrorSpan = function(text) {
 	if(this.error) {
 		if(this.form.errorIcon) {
 			if(text) {
