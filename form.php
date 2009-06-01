@@ -33,7 +33,7 @@
 		function createInputField($type, $name, $required, $label) {
 			$class = 'Dinges'. $type;
 			if(!is_subclass_of($class, 'DingesInputField')) {
-				throw new DingesException($type .' is not an subclass of DingesInputField');
+				throw new DingesException($type .' is not a subclass of DingesInputField');
 			}
 			$field = new $class($name, $required, $label);
 			$this->addField($field);
@@ -167,6 +167,10 @@
 				}
 				$fieldStrings = $field->render();
 				$this->strings = array_merge($this->strings, $fieldStrings);
+			}
+
+			foreach($this->errorMessages as $key => $msg) {
+				$this->strings['form_init_code'] .= "\ndf.setErrorMessage('". $key ."', '". addslashes($msg) ."');";
 			}
 
 			if($focusOn) {
