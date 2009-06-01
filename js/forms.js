@@ -102,10 +102,10 @@ DingesFormField.prototype.validate = function() {
 			result = 'ERR_UNDER_MINLENGTH';
 			break;
 		} else if(restriction == 'min' && !isNaN(this.field.value) && parseInt(this.field.value) < this.restrictions[restriction]) {
-			result = 'ERR_OVER_MAX';
+			result = 'ERR_UNDER_MIN';
 			break;
 		} else if(restriction == 'max' && !isNaN(this.field.value) && parseInt(this.field.value) > this.restrictions[restriction]) {
-			result = 'ERR_UNDER_MIN';
+			result = 'ERR_OVER_MAX';
 			break;
 		}
 	}
