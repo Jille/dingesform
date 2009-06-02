@@ -16,7 +16,6 @@
 		protected $keepValue = true;
 
 		protected $validationCallbacks = array();
-		protected $validationRegexes = array();
 
 		function __construct($name) {
 			$this->name = $name;
@@ -26,11 +25,6 @@
 		function validate($value) {
 			if(!$value) {
 				return true;
-			}
-			foreach($this->validationRegexes as $regex) {
-				if(!preg_match($regex['regex'], $value)) {
-					return $regex['errorCode'];
-				}
 			}
 			foreach($this->validationCallbacks as $callback) {
 				if(($error = call_user_func_array($callback, array($value, $this))) !== true) {
@@ -148,14 +142,6 @@
 
 		function isValid() {
 			return $this->valid;
-		}
-
-		function addValidationRegex($regex, $errorCode = 'ERR_INVALID') {
-			$this->validationRegexes[] = array('regex' => $regex, 'errorCode' => $errorCode);
-		}
-
-		function clearValidationRegexes() {
-			$this->validationRegexes = array();
 		}
 
 		function addValidationCallback($callback) {

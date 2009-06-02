@@ -2,6 +2,8 @@
 	class DingesText extends DingesInputField {
 		protected $maxLength;
 		protected $minLength;
+
+		protected $validationRegexes = array();
 		
 		function validate($value) {
 			if(($error = parent::validate($value)) !== true) {
@@ -12,6 +14,11 @@
 			}
 			if($this->minLength && strlen($value) < $this->minLength) {
 				return 'ERR_UNDER_MINLENGTH';
+			}
+			foreach($this->validationRegexes as $regex) {
+				if(!preg_match($regex['regex'], $value)) {
+					return $regex['errorCode'];
+				}
 			}
 			return true;
 		}
@@ -49,6 +56,14 @@
 			} else {
 				$this->minLength = 0;
 			}
+		}
+
+		function addValidationRegex($regex, $errorCode = 'ERR_INVALID') {
+			$this->validationRegexes[] = array('regex' => $regex, 'errorCode' => $errorCode);
+		}
+
+		function clearValidationRegexes() {
+			$this->validationRegexes = array();
 		}
 	}
 ?>
