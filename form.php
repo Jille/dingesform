@@ -233,6 +233,10 @@
 			$this->errorMessages[$key] = strval($value);
 		}
 
+		function getErrorMessage($key) {
+			return $this->errorMessages[$key];
+		}
+
 		function setDefaultErrorMessages() {
 			$this->errorMessages['ERR_INVALID'] = 'De waarde van dit veld is niet correct';
 			$this->errorMessages['ERR_EMPTY'] = 'Dit veld is verplicht';

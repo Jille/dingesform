@@ -85,7 +85,7 @@
 			if($this->isValid() || !$this->form->isPosted()) {
 				$content = '';
 			} else {
-				$content = $this->errorCode;
+				$content = $this->form->getErrorMessage($this->errorCode);
 			}
 			if($content && $this->form->getErrorIcon()) {
 				$imgattributes = array();
