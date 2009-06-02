@@ -113,7 +113,7 @@ DingesFormField.prototype.validate = function() {
 }
 
 DingesFormField.prototype.setError = function (errorCode) {
-	this.setErrorSpan(this.form.getError(errorCode)); // XXX vertalen
+	this.setErrorSpan(this.form.getError(errorCode));
 	dinges_addClass(this.field, 'dingesError');
 	if(this.label) {
 		dinges_addClass(this.label, 'dingesErrorLabel');
@@ -148,12 +148,18 @@ DingesFormField.prototype.setErrorSpan = function(text) {
 }
 
 function dinges_addClass(el, className) {
+	var classes = el.className.split(' ');
+	for(var i = 0; classes.length > i; i++) {
+		if(classes[i] == className) {
+			return;
+		}
+	}
 	el.className += ' '+ className;
 }
 
 function dinges_removeClass(el, className) {
-	var classes = el.className.split(/ /);
-	for(var i = 0; classes.length>i; i++) {
+	var classes = el.className.split(' ');
+	for(var i = 0; classes.length > i; i++) {
 		if(classes[i] == className) {
 			delete classes[i];
 			break;
