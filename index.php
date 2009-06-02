@@ -60,7 +60,7 @@
 
 	$pass = $f->createInputField('password', 'pass', false, 'Wachtwoord');
 
-	function notEqualsName($value) {
+	function notEqualsName($value, $field) {
 		global $name;
 		if($name->getValue() == $value) {
 			return 'ERR_UNSAFE';
