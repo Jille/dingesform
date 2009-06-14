@@ -64,6 +64,7 @@ DingesForm.prototype.setErrorIcon = function(src) {
 function DingesFormField(fieldEl) {
 	this.restrictions = {};
 	this.regexes = [];
+	this.callbacks = [];
 	this.field = fieldEl;
 	this.label = document.getElementById(fieldEl.id +'_label');
 	this.error = document.getElementById(fieldEl.id +'_error');
@@ -87,11 +88,16 @@ DingesFormField.prototype = {
 	error: null, // let op: dat is het error-span element
 	type: null,
 	restrictions: null,
+	callbacks: null,
 	regexes: null
 };
 
 DingesFormField.prototype.setForm = function(form) {
 	this.form = form;
+}
+
+DingesFormField.prototype.getValue = function() {
+	return this.field.value;
 }
 
 /**
@@ -119,14 +125,27 @@ DingesFormField.prototype.validate = function() {
 			break;
 		}
 	}
-	if(result === true) {
+	if(this.getValue() && result === true) {
+		for(var i = 0; i < this.callbacks.length; i++) {
+			result = this.callbacks[i].call(null, this);
+			if(result !== true) {
+				break;
+			}
+		}
+	}
+	if(this.getValue() && result === true) {
 		for(var i = 0; i < this.regexes.length; i++) {
 			if(!this.regexes[i]['regex'].test(this.field.value)) {
 				result = this.regexes[i]['errorCode'];
+				break;
 			}
 		}
 	}
 	return result;
+}
+
+DingesFormField.prototype.addValidationCallback = function(callback) {
+	this.callbacks[this.callbacks.length] = callback;
 }
 
 DingesFormField.prototype.addValidationRegex = function(regex, errorCode) {

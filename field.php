@@ -16,6 +16,7 @@
 		protected $keepValue = true;
 
 		protected $validationCallbacks = array();
+		protected $jsValidationCallbacks = array();
 
 		function __construct($name) {
 			$this->name = $name;
@@ -91,7 +92,12 @@
 		}
 
 		function getFormInitCode() {
-			return "\ndf.addField('". $this->name ."', new DingesFormField(document.getElementById('". $this->getFullId() ."')));";
+			$out = "\ndf.addField('". $this->name ."', new DingesFormField(document.getElementById('". $this->getFullId() ."')));";
+
+			foreach($this->jsValidationCallbacks as $callback) {
+				$out .= "\ntry { df.getField('". $this->name ."').addValidationCallback(". $callback .");} catch(e) {};";
+			}
+			return $out;
 		}
 
 		function setAttribute($name, $value, $append = false) {
@@ -148,6 +154,10 @@
 				throw new DingesException("Invalid callback given to addValidationCallback");
 			}
 			$this->validationCallbacks[] = $callback;
+		}
+
+		function addJsValidationCallback($callback) {
+			$this->jsValidationCallbacks[] = $callback;
 		}
 
 		function clearValidationCallbacks() {

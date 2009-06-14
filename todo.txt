@@ -4,7 +4,7 @@
   - date/time
 q arrays
 * javascript
-  f validationCallbacks
+  F validationCallbacks
   F validationRegexes
   - AJAX submitting
 * errorList

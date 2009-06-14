@@ -68,6 +68,7 @@
 		return true;
 	}
 	$pass->addValidationCallback('notEqualsName');
+	$pass->addJsValidationCallback('notEqualsName');
 
 	$jaofnee = $f->createInputField('radiobutton', 'jaofnee', false, 'Ja of Nee');
 	$jaofnee->addItem('ja', 'Ja');
@@ -130,6 +131,13 @@
 			function watdanwel_bla() {
 				document.getElementById('watdanwel_tr').style.display = document.getElementById('blaat_jaofnee_nee').checked ? '' : 'none';
 				// XXX setRequired('watdanwel');
+			}
+
+			function notEqualsName(field) {
+				if(field.getValue() == field.form.getField('name').getValue()) {
+					return 'ERR_UNSAFE';
+				}
+				return true;
 			}
 
 			function page_init() {
