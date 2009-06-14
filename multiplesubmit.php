@@ -26,5 +26,9 @@
 			}
 			return $strings;
 		}
+
+		function getFormInitCode() {
+			return '';
+		}
 	}
 ?>

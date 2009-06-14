@@ -1,8 +1,8 @@
 <?php
 	class DingesForm {
 		protected $fields = array();
-		// XXX moet protected worden!
-		public $strings = array();
+
+		protected $strings = array();
 
 		protected $fieldIdPrefix = '';
 
@@ -167,6 +167,8 @@
 				}
 				$fieldStrings = $field->render();
 				$this->strings = array_merge($this->strings, $fieldStrings);
+
+				$this->strings['form_init_code'] .= "\n". $field->getFormInitCode();
 			}
 
 			foreach($this->errorMessages as $key => $msg) {

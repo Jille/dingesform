@@ -58,8 +58,19 @@
 			}
 		}
 
-		function addValidationRegex($regex, $errorCode = 'ERR_INVALID') {
-			$this->validationRegexes[] = array('regex' => $regex, 'errorCode' => $errorCode);
+		function getFormInitCode() {
+			$code = parent::getFormInitCode();
+
+			foreach($this->validationRegexes as $regex) {
+				if($regex['useInJs']) {
+					$code .= "\ndf.getField('". $this->name ."').addValidationRegex(". $regex['regex'] .", '". $regex['errorCode'] ."');";
+				}
+			}
+			return $code;
+		}
+
+		function addValidationRegex($regex, $errorCode = 'ERR_INVALID', $useInJs = true) {
+			$this->validationRegexes[] = array('regex' => $regex, 'errorCode' => $errorCode, 'useInJs' => $useInJs);
 		}
 
 		function clearValidationRegexes() {

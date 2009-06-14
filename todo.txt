@@ -4,11 +4,12 @@
   - date/time
 q arrays
 * javascript
-  - validationCallbacks
-  f validationRegexes
+  f validationCallbacks
+  F validationRegexes
   - AJAX submitting
 * errorList
 * form validation
+* magic_quotes_gpc goed afhandelen
 * smarty plugin
 * docs + website
 * naam

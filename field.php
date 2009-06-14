@@ -60,7 +60,6 @@
 
 		function render() {
 			$this->fillAttributes();
-			$this->fillFormInitCode();
 			if(isset($this->restrictions)) {
 				$this->fillRestrictions();
 			}
@@ -91,8 +90,8 @@
 			return DingesForm::generateTag('span', $attributes, $content);
 		}
 
-		function fillFormInitCode() {
-			$this->form->strings['form_init_code'] .= "\ndf.addField('". $this->name ."', new DingesFormField(document.getElementById('". $this->getFullId() ."')));";
+		function getFormInitCode() {
+			return "\ndf.addField('". $this->name ."', new DingesFormField(document.getElementById('". $this->getFullId() ."')));";
 		}
 
 		function setAttribute($name, $value, $append = false) {

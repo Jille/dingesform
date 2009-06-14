@@ -45,5 +45,9 @@
 			}
 			return DingesForm::generateTag('input', $attributes);
 		}
+
+		function getFormInitCode() {
+			return '';
+		}
 	}
 ?>

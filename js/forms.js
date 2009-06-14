@@ -20,6 +20,13 @@ DingesForm.prototype.addField = function(name, field) {
 	field.setForm(this);
 }
 
+DingesForm.prototype.getField = function(name) {
+	if(this.fields[name]) {
+		return this.fields[name];
+	}
+	return false;
+}
+
 DingesForm.prototype.setFocus = function(fname) {
 	this.fields[fname].field.focus();
 }
@@ -56,6 +63,7 @@ DingesForm.prototype.setErrorIcon = function(src) {
 
 function DingesFormField(fieldEl) {
 	this.restrictions = {};
+	this.regexes = [];
 	this.field = fieldEl;
 	this.label = document.getElementById(fieldEl.id +'_label');
 	this.error = document.getElementById(fieldEl.id +'_error');
@@ -69,6 +77,7 @@ function DingesFormField(fieldEl) {
 			}
 		}
 	}
+	return true;
 }
 
 DingesFormField.prototype = {
@@ -77,7 +86,8 @@ DingesFormField.prototype = {
 	label: null,
 	error: null, // let op: dat is het error-span element
 	type: null,
-	restrictions: null
+	restrictions: null,
+	regexes: null
 };
 
 DingesFormField.prototype.setForm = function(form) {
@@ -109,7 +119,18 @@ DingesFormField.prototype.validate = function() {
 			break;
 		}
 	}
+	if(result === true) {
+		for(var i = 0; i < this.regexes.length; i++) {
+			if(!this.regexes[i]['regex'].test(this.field.value)) {
+				result = this.regexes[i]['errorCode'];
+			}
+		}
+	}
 	return result;
+}
+
+DingesFormField.prototype.addValidationRegex = function(regex, errorCode) {
+	this.regexes[this.regexes.length] = {'regex': regex, 'errorCode': errorCode};
 }
 
 DingesFormField.prototype.setError = function (errorCode) {
