@@ -1,0 +1,14 @@
+* velden uitbreiden:
+  - button
+  - decimal
+  - date/time
+J arrays
+* javascript
+  - validationCallbacks
+  - validationRegexes
+  - AJAX submitting
+* errorList
+* form validation
+* smarty plugin
+* docs + website
+* naam
