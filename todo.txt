@@ -2,13 +2,14 @@
   - button
   - decimal
   - date/time
-J arrays
+q arrays
 * javascript
   - validationCallbacks
-  - validationRegexes
+  f validationRegexes
   - AJAX submitting
 * errorList
 * form validation
 * smarty plugin
 * docs + website
 * naam
+* alle XXX wegwerken
