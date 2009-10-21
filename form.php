@@ -10,7 +10,7 @@
 
 		protected $attributes = array();
 
-		protected $validationErrors;
+		protected $validationErrors = array();
 		protected $validated = false;
 
 		protected $autoFocus = false;
