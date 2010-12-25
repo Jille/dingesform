@@ -20,7 +20,7 @@
 			throw new DingesException('DingesFile->setDefaultValue() has no use');
 		}
 
-		function getDefaultValue($value) {
+		function getDefaultValue() {
 			throw new DingesException('DingesFile->getDefaultValue() has no use');
 		}
 
